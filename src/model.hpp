@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 using std::vector;
 
@@ -20,7 +21,7 @@ class Model{
         Model();
         Model(const Model& other);
         Model& operator=(const Model& other);
-        ~Model();
+        virtual ~Model();
 
         void add(System* system);
         void add(Flow* flow);

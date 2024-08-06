@@ -9,7 +9,7 @@ class ExponentialFlow : public Flow {
         ExponentialFlow(const string& name, System* source = nullptr, System* destination = nullptr);
         ExponentialFlow(const ExponentialFlow& other);
         ExponentialFlow& operator=(const ExponentialFlow& other);
-        ~ExponentialFlow();
+        virtual ~ExponentialFlow();
 
         double equation() const override;    
 };

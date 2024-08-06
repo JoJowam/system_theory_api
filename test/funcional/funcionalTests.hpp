@@ -6,10 +6,10 @@
 #include "../../src/logisticFlow.hpp"
 
 #include <assert.h>
-#include <cmath>
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
+#include <cmath>
 
 #ifndef FUNCIONAL_TESTS
 #define FUNCIONAL_TESTS

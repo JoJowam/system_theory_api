@@ -9,7 +9,7 @@ class LogisticFlow : public Flow {
         LogisticFlow(const string& name, System* source = nullptr, System* destination = nullptr);
         LogisticFlow(const LogisticFlow& other);
         LogisticFlow& operator=(const LogisticFlow& other);
-        ~LogisticFlow();
+        virtual ~LogisticFlow();
 
         double equation() const override;    
 };

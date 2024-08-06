@@ -34,17 +34,26 @@ void Model::add(Flow* flow) {
 
 void Model::execute(int startTime, int endTime, int timeStep) {
     for (int currentTime = startTime; currentTime <= endTime; currentTime += timeStep) {
-        for (Flow* flow : flows) {
-            if (flow->getSource() && flow->getDestination()){
-                //TODO: iterate over all flows
-                std::cout << "FlowName: " << flow->getName() << std::endl;
+        vector<double> systemValueChanges(systems.size(), 0.0);
 
-                flow->getDestination()->setValue(flow->getDestination()->getValue() + flow->equation());
-                flow->getSource()->setValue(flow->getSource()->getValue() - flow->equation());
-                
-                std::cout << "DestinationValue: " << flow->getDestination()->getValue() << std::endl;
-                std::cout << "SourceValue: " << flow->getSource()->getValue() << std::endl;
+        for (Flow* currentFlow : flows) {
+            if (currentFlow->getSource() && currentFlow->getDestination()) {
+                double flowValue = currentFlow->equation();
+
+                auto sourceSystemIterator = find(systems.begin(), systems.end(), currentFlow->getSource());
+                auto destinationSystemIterator = find(systems.begin(), systems.end(), currentFlow->getDestination());
+
+                int sourceSystemIndex = distance(systems.begin(), sourceSystemIterator);
+                int destinationSystemIndex = distance(systems.begin(), destinationSystemIterator);
+
+                systemValueChanges[sourceSystemIndex] -= flowValue;
+                systemValueChanges[destinationSystemIndex] += flowValue;
             }
+        }
+
+        for (size_t i = 0; i < systems.size(); ++i) {
+            systems[i]->setValue(systems[i]->getValue() + systemValueChanges[i]);
         }
     }
 }
+
