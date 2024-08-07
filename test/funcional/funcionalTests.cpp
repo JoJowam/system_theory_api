@@ -1,5 +1,61 @@
 #include "funcionalTests.hpp"
+#include <iostream>
+#include <cassert>
+#include <cmath>
 
+//ExponentialFlow Implementation
+ExponentialFlow::ExponentialFlow() 
+    : Flow() {}
+
+ExponentialFlow::ExponentialFlow(const std::string& name, System* source, System* destination) 
+    : Flow(name, source, destination) {}
+
+ExponentialFlow::ExponentialFlow(const ExponentialFlow& other) 
+    : Flow(other) {}
+
+ExponentialFlow& ExponentialFlow::operator=(const ExponentialFlow& other) {
+    if (this != &other) {
+        Flow::operator=(other);
+    }
+    return *this;
+}
+
+ExponentialFlow::~ExponentialFlow() {}
+
+double ExponentialFlow::equation() const {
+    if (source != nullptr) {
+        return 0.01 * source->getValue();
+    }
+    return 0.0;
+}
+
+//LogisticFlow Implementation
+LogisticFlow::LogisticFlow() 
+    : Flow() {}
+
+LogisticFlow::LogisticFlow(const std::string& name, System* source, System* destination) 
+    : Flow(name, source, destination) {}
+
+LogisticFlow::LogisticFlow(const LogisticFlow& other) 
+    : Flow(other) {}
+
+LogisticFlow& LogisticFlow::operator=(const LogisticFlow& other) {
+    if (this != &other) {
+        Flow::operator=(other);
+    }
+    return *this;
+}
+
+LogisticFlow::~LogisticFlow() {}
+
+double LogisticFlow::equation() const {
+    if (source != nullptr) {
+        return 0.01 * destination->getValue() * (1 - destination->getValue() / 70);
+    }
+    return 0.0;
+}
+
+//Tests Implementation
 void exponentialFlow() {
     std::cout << "Starting Exponential Flow Test..." << std::endl;
     //System build
@@ -16,7 +72,7 @@ void exponentialFlow() {
     model->add(exponentialFlow);
 
     //Model execution
-    model->execute(1, 100, 1);
+    model->execute(0, 100, 1);
 
     //Asserts
     assert(fabs((round((population1->getValue() * 10000)) - 10000 * 36.6032)) < 0.0001);
@@ -41,7 +97,7 @@ void logisticFlow() {
     model->add(logisticFlow);
 
     //Model execution
-    model->execute(1, 100, 1);
+    model->execute(0, 100, 1);
 
     assert(fabs((round((p1->getValue() * 10000)) - 10000 * 88.2167)) < 0.0001);
     assert(fabs((round((p2->getValue() * 10000)) - 10000 * 21.7833)) < 0.0001);
@@ -81,7 +137,7 @@ void complexFlow() {
     model->add(v);
 
     //Model execution
-    model->execute(1, 100, 1);
+    model->execute(0, 100, 1);
 
     assert(fabs((round((q1->getValue() * 10000)) - 10000 * 31.8513)) < 0.0001);
     assert(fabs((round((q2->getValue() * 10000)) - 10000 * 18.4003)) < 0.0001);

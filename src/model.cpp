@@ -15,14 +15,7 @@ Model& Model::operator=(const Model& other) {
     return *this;
 }
 
-Model::~Model() {
-    for (System* system : systems) {
-        delete system;
-    }
-    for (Flow* flow : flows) {
-        delete flow;
-    }
-}
+Model::~Model() {}
 
 void Model::add(System* system) {
     systems.push_back(system);
@@ -33,7 +26,7 @@ void Model::add(Flow* flow) {
 }
 
 void Model::execute(int startTime, int endTime, int timeStep) {
-    for (int currentTime = startTime; currentTime <= endTime; currentTime += timeStep) {
+    for (int currentTime = startTime + timeStep; currentTime <= endTime; currentTime += timeStep) {
         vector<double> systemValueChanges(systems.size(), 0.0);
 
         for (Flow* currentFlow : flows) {
@@ -54,6 +47,12 @@ void Model::execute(int startTime, int endTime, int timeStep) {
         for (size_t i = 0; i < systems.size(); ++i) {
             systems[i]->setValue(systems[i]->getValue() + systemValueChanges[i]);
         }
+
+        std::cout << "System States at time " << currentTime << ":" << std::endl;
+        for (size_t i = 0; i < systems.size(); ++i) {
+            std::cout << "System: " << systems[i]->getName() 
+                      << ", Value: " << systems[i]->getValue() << std::endl;
+        }
+        std::cout << std::endl;
     }
 }
-
