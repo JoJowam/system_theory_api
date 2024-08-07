@@ -17,6 +17,8 @@ class Model{
         vector<System*> systems;
         vector<Flow*> flows;
 
+        typedef vector<System*>::iterator SystemIterator;
+        typedef vector<Flow*>::iterator FlowIterator;
     public:
         Model();
         Model(const Model& other);

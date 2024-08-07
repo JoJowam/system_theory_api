@@ -33,8 +33,8 @@ void Model::execute(int startTime, int endTime, int timeStep) {
             if (currentFlow->getSource() && currentFlow->getDestination()) {
                 double flowValue = currentFlow->equation();
 
-                auto sourceSystemIterator = find(systems.begin(), systems.end(), currentFlow->getSource());
-                auto destinationSystemIterator = find(systems.begin(), systems.end(), currentFlow->getDestination());
+                SystemIterator sourceSystemIterator = find(systems.begin(), systems.end(), currentFlow->getSource());
+                SystemIterator destinationSystemIterator = find(systems.begin(), systems.end(), currentFlow->getDestination());
 
                 int sourceSystemIndex = distance(systems.begin(), sourceSystemIterator);
                 int destinationSystemIndex = distance(systems.begin(), destinationSystemIterator);
@@ -43,16 +43,14 @@ void Model::execute(int startTime, int endTime, int timeStep) {
                 systemValueChanges[destinationSystemIndex] += flowValue;
             }
         }
+        
+        SystemIterator systemIt = systems.begin();
+        auto valueChangeIt = systemValueChanges.begin();
 
-        for (size_t i = 0; i < systems.size(); ++i) {
-            systems[i]->setValue(systems[i]->getValue() + systemValueChanges[i]);
+        while (systemIt != systems.end() && valueChangeIt != systemValueChanges.end()) {
+            (*systemIt)->setValue((*systemIt)->getValue() + *valueChangeIt);
+            ++systemIt;
+            ++valueChangeIt;
         }
-
-        std::cout << "System States at time " << currentTime << ":" << std::endl;
-        for (size_t i = 0; i < systems.size(); ++i) {
-            std::cout << "System: " << systems[i]->getName() 
-                      << ", Value: " << systems[i]->getValue() << std::endl;
-        }
-        std::cout << std::endl;
     }
 }
