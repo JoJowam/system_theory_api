@@ -1,0 +1,233 @@
+.TH "Model" 3 "Version v0.1.0" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Model \- Represents a simulation model containing systems and flows\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <model\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBModel\fP ()"
+.br
+.RI "Default constructor for the \fBModel\fP class\&. "
+.ti -1c
+.RI "\fBModel\fP (const \fBModel\fP &other)"
+.br
+.RI "Copy constructor for the \fBModel\fP class\&. "
+.ti -1c
+.RI "\fBModel\fP & \fBoperator=\fP (const \fBModel\fP &other)"
+.br
+.RI "Assignment operator for the \fBModel\fP class\&. "
+.ti -1c
+.RI "virtual \fB~Model\fP ()"
+.br
+.RI "Destructor for the \fBModel\fP class\&. "
+.ti -1c
+.RI "void \fBadd\fP (\fBSystem\fP *system)"
+.br
+.RI "Adds a system to the model\&. "
+.ti -1c
+.RI "void \fBadd\fP (\fBFlow\fP *flow)"
+.br
+.RI "Adds a flow to the model\&. "
+.ti -1c
+.RI "void \fBexecute\fP (int startTime, int endTime, int timeStep)"
+.br
+.RI "Executes the model simulation over a specified time range\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a simulation model containing systems and flows\&. 
+
+The \fBModel\fP class manages collections of \fBSystem\fP and \fBFlow\fP objects\&. It can execute the model over a defined time period, applying the flow equations to the systems at each time step to simulate dynamic behavior\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBSystem\fP 
+
+.PP
+\fBFlow\fP 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Model::Model ()"
+
+.PP
+Default constructor for the \fBModel\fP class\&. Initializes a \fBModel\fP object with no systems or flows\&. 
+.nf
+5 {}
+.PP
+.fi
+
+.SS "Model::Model (const \fBModel\fP & other)"
+
+.PP
+Copy constructor for the \fBModel\fP class\&. Initializes a \fBModel\fP object as a copy of another \fBModel\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIother\fP \fBModel\fP object to copy\&. 
+.RE
+.PP
+
+.nf
+8     : systems(other\&.systems), flows(other\&.flows) {}
+.PP
+.fi
+
+.SS "Model::~Model ()\fR [virtual]\fP"
+
+.PP
+Destructor for the \fBModel\fP class\&. Destroys a \fBModel\fP object\&. 
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+18 {}
+.PP
+.fi
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Model::add (\fBFlow\fP * flow)"
+
+.PP
+Adds a flow to the model\&. Adds a flow to the model by storing a pointer to the flow in the flows vector\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIflow\fP Pointer to the \fBFlow\fP object to be added\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+24                           {
+25     flows\&.push_back(flow);
+26 }
+.PP
+.fi
+
+.SS "void Model::add (\fBSystem\fP * system)"
+
+.PP
+Adds a system to the model\&. Adds a system to the model by storing a pointer to the system in the systems vector\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsystem\fP Pointer to the system to be added\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+20                               {
+21     systems\&.push_back(system);
+22 }
+.PP
+.fi
+
+.SS "void Model::execute (int startTime, int endTime, int timeStep)"
+
+.PP
+Executes the model simulation over a specified time range\&. Iterates over each time step, applying flow equations to the systems to simulate the dynamic behavior of the model\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstartTime\fP The time at which the model execution begins\&. 
+.br
+\fIendTime\fP The time at which the model execution ends\&. 
+.br
+\fItimeStep\fP The increment in time between each execution step\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+28                                                             {
+29     for (int currentTime = startTime + timeStep; currentTime <= endTime; currentTime += timeStep) {
+30         vector<double> systemValueChanges(systems\&.size(), 0\&.0);
+31 
+32         for (Flow* currentFlow : flows) {
+33             if (currentFlow\->getSource() && currentFlow\->getDestination()) {
+34                 double flowValue = currentFlow\->equation();
+35 
+36                 SystemIterator sourceSystemIterator = find(systems\&.begin(), systems\&.end(), currentFlow\->getSource());
+37                 SystemIterator destinationSystemIterator = find(systems\&.begin(), systems\&.end(), currentFlow\->getDestination());
+38 
+39                 int sourceSystemIndex = distance(systems\&.begin(), sourceSystemIterator);
+40                 int destinationSystemIndex = distance(systems\&.begin(), destinationSystemIterator);
+41 
+42                 systemValueChanges[sourceSystemIndex] \-= flowValue;
+43                 systemValueChanges[destinationSystemIndex] += flowValue;
+44             }
+45         }
+46         
+47         SystemIterator systemIt = systems\&.begin();
+48         auto valueChangeIt = systemValueChanges\&.begin();
+49 
+50         while (systemIt != systems\&.end() && valueChangeIt != systemValueChanges\&.end()) {
+51             (*systemIt)\->setValue((*systemIt)\->getValue() + *valueChangeIt);
+52             ++systemIt;
+53             ++valueChangeIt;
+54         }
+55     }
+56 }
+.PP
+.fi
+
+.SS "\fBModel\fP & Model::operator= (const \fBModel\fP & other)"
+
+.PP
+Assignment operator for the \fBModel\fP class\&. Assigns one \fBModel\fP object to another\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIother\fP Another instance of \fBModel\fP to be assigned\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to this \fBModel\fP instance\&. 
+.RE
+.PP
+
+.nf
+10                                           {
+11     if (this != &other) {
+12         systems = other\&.systems;
+13         flows = other\&.flows;
+14     }
+15     return *this;
+16 }
+.PP
+.fi
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.

@@ -1,0 +1,237 @@
+\doxysection{Model Class Reference}
+\hypertarget{class_model}{}\label{class_model}\index{Model@{Model}}
+
+
+Represents a simulation model containing systems and flows.  
+
+
+
+
+{\ttfamily \#include $<$model.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_model_ae3b375de5f6df4faf74a95d64748e048}{Model}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_model}{Model} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_model_a48858e5f328ba822b430d86a76a6ceeb}{Model}} (const \mbox{\hyperlink{class_model}{Model}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor for the \doxylink{class_model}{Model} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_model}{Model}} \& \mbox{\hyperlink{class_model_aaa76b9c72b66fa245f6b7b92d1ecc032}{operator=}} (const \mbox{\hyperlink{class_model}{Model}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator for the \doxylink{class_model}{Model} class. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_model_ad6ebd2062a0b823db841a0b88baac4c0}{\texorpdfstring{$\sim$}{\string~}\+Model}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_model}{Model} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_a302d4ed93c6e6f9a0f728e021a91f821}{add}} (\mbox{\hyperlink{class_system}{System}} \texorpdfstring{$\ast$}{*}system)
+\begin{DoxyCompactList}\small\item\em Adds a system to the model. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_ab69613bde0ace81c92bbf519660ccb2c}{add}} (\mbox{\hyperlink{class_flow}{Flow}} \texorpdfstring{$\ast$}{*}flow)
+\begin{DoxyCompactList}\small\item\em Adds a flow to the model. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_ac9bcc9805d2b2c18a3e93b0723ccc40e}{execute}} (int start\+Time, int end\+Time, int time\+Step)
+\begin{DoxyCompactList}\small\item\em Executes the model simulation over a specified time range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a simulation model containing systems and flows. 
+
+The \doxylink{class_model}{Model} class manages collections of \doxylink{class_system}{System} and \doxylink{class_flow}{Flow} objects. It can execute the model over a defined time period, applying the flow equations to the systems at each time step to simulate dynamic behavior. \begin{DoxySeeAlso}{See also}
+\doxylink{class_system}{System} 
+
+\doxylink{class_flow}{Flow} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_model_ae3b375de5f6df4faf74a95d64748e048}\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_model_ae3b375de5f6df4faf74a95d64748e048} 
+Model\+::\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for the \doxylink{class_model}{Model} class. 
+
+Initializes a \doxylink{class_model}{Model} object with no systems or flows. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_model_a48858e5f328ba822b430d86a76a6ceeb}\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_model_a48858e5f328ba822b430d86a76a6ceeb} 
+Model\+::\+Model (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_model}{Model}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor for the \doxylink{class_model}{Model} class. 
+
+Initializes a \doxylink{class_model}{Model} object as a copy of another \doxylink{class_model}{Model} object. 
+\begin{DoxyParams}{Parameters}
+{\em other} & \doxylink{class_model}{Model} object to copy. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \ \ \ \ :\ systems(other.systems),\ flows(other.flows)\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_model_ad6ebd2062a0b823db841a0b88baac4c0}\index{Model@{Model}!````~Model@{\texorpdfstring{$\sim$}{\string~}Model}}
+\index{````~Model@{\texorpdfstring{$\sim$}{\string~}Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Model()}{\string~Model()}}
+{\footnotesize\ttfamily \label{class_model_ad6ebd2062a0b823db841a0b88baac4c0} 
+Model\+::\texorpdfstring{$\sim$}{\string~}\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor for the \doxylink{class_model}{Model} class. 
+
+Destroys a \doxylink{class_model}{Model} object. \begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_model_ab69613bde0ace81c92bbf519660ccb2c}\index{Model@{Model}!add@{add}}
+\index{add@{add}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_model_ab69613bde0ace81c92bbf519660ccb2c} 
+void Model\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_flow}{Flow}} \texorpdfstring{$\ast$}{*}}]{flow}{}\end{DoxyParamCaption})}
+
+
+
+Adds a flow to the model. 
+
+Adds a flow to the model by storing a pointer to the flow in the flows vector. 
+\begin{DoxyParams}{Parameters}
+{\em flow} & Pointer to the \doxylink{class_flow}{Flow} object to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ flows.push\_back(flow);}
+\DoxyCodeLine{00026\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_model_a302d4ed93c6e6f9a0f728e021a91f821}\index{Model@{Model}!add@{add}}
+\index{add@{add}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_model_a302d4ed93c6e6f9a0f728e021a91f821} 
+void Model\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_system}{System}} \texorpdfstring{$\ast$}{*}}]{system}{}\end{DoxyParamCaption})}
+
+
+
+Adds a system to the model. 
+
+Adds a system to the model by storing a pointer to the system in the systems vector. 
+\begin{DoxyParams}{Parameters}
+{\em system} & Pointer to the system to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ systems.push\_back(system);}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_model_ac9bcc9805d2b2c18a3e93b0723ccc40e}\index{Model@{Model}!execute@{execute}}
+\index{execute@{execute}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily \label{class_model_ac9bcc9805d2b2c18a3e93b0723ccc40e} 
+void Model\+::execute (\begin{DoxyParamCaption}\item[{int}]{start\+Time}{, }\item[{int}]{end\+Time}{, }\item[{int}]{time\+Step}{}\end{DoxyParamCaption})}
+
+
+
+Executes the model simulation over a specified time range. 
+
+Iterates over each time step, applying flow equations to the systems to simulate the dynamic behavior of the model. 
+\begin{DoxyParams}{Parameters}
+{\em start\+Time} & The time at which the model execution begins. \\
+\hline
+{\em end\+Time} & The time at which the model execution ends. \\
+\hline
+{\em time\+Step} & The increment in time between each execution step. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ currentTime\ =\ startTime\ +\ timeStep;\ currentTime\ <=\ endTime;\ currentTime\ +=\ timeStep)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ vector<double>\ systemValueChanges(systems.size(),\ 0.0);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_flow}{Flow}}*\ currentFlow\ :\ flows)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentFlow-\/>getSource()\ \&\&\ currentFlow-\/>getDestination())\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flowValue\ =\ currentFlow-\/>equation();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SystemIterator\ sourceSystemIterator\ =\ find(systems.begin(),\ systems.end(),\ currentFlow-\/>getSource());}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SystemIterator\ destinationSystemIterator\ =\ find(systems.begin(),\ systems.end(),\ currentFlow-\/>getDestination());}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sourceSystemIndex\ =\ distance(systems.begin(),\ sourceSystemIterator);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ destinationSystemIndex\ =\ distance(systems.begin(),\ destinationSystemIterator);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systemValueChanges[sourceSystemIndex]\ -\/=\ flowValue;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systemValueChanges[destinationSystemIndex]\ +=\ flowValue;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ SystemIterator\ systemIt\ =\ systems.begin();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ valueChangeIt\ =\ systemValueChanges.begin();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (systemIt\ !=\ systems.end()\ \&\&\ valueChangeIt\ !=\ systemValueChanges.end())\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ (*systemIt)-\/>setValue((*systemIt)-\/>getValue()\ +\ *valueChangeIt);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ ++systemIt;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ ++valueChangeIt;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_model_aaa76b9c72b66fa245f6b7b92d1ecc032}\index{Model@{Model}!operator=@{operator=}}
+\index{operator=@{operator=}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_model_aaa76b9c72b66fa245f6b7b92d1ecc032} 
+\mbox{\hyperlink{class_model}{Model}} \& Model\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_model}{Model}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator for the \doxylink{class_model}{Model} class. 
+
+Assigns one \doxylink{class_model}{Model} object to another. 
+\begin{DoxyParams}{Parameters}
+{\em other} & Another instance of \doxylink{class_model}{Model} to be assigned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this \doxylink{class_model}{Model} instance. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ systems\ =\ other.systems;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ flows\ =\ other.flows;}
+\DoxyCodeLine{00014\ \ \ \ \ \}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/dev/bccb33-\/workspace/my\+Vensim/src/\mbox{\hyperlink{model_8hpp}{model.\+hpp}}\item 
+E\+:/dev/bccb33-\/workspace/my\+Vensim/src/\mbox{\hyperlink{model_8cpp}{model.\+cpp}}\end{DoxyCompactItemize}

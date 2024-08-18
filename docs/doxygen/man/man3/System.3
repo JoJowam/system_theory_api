@@ -1,0 +1,230 @@
+.TH "System" 3 "Version v0.1.0" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+System \- Represents an individual system within a simulation model\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <system\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSystem\fP ()"
+.br
+.RI "Default constructor for the \fBSystem\fP class\&. "
+.ti -1c
+.RI "\fBSystem\fP (const string &name)"
+.br
+.RI "Constructs a system with a specified name\&. "
+.ti -1c
+.RI "\fBSystem\fP (const string &name, double value)"
+.br
+.RI "Constructs a system with a name and value\&. "
+.ti -1c
+.RI "\fBSystem\fP (const \fBSystem\fP &other)"
+.br
+.RI "Copy constructor for the \fBSystem\fP class\&. "
+.ti -1c
+.RI "\fBSystem\fP & \fBoperator=\fP (const \fBSystem\fP &other)"
+.br
+.RI "Assignment operator for the \fBSystem\fP class\&. "
+.ti -1c
+.RI "virtual \fB~System\fP ()"
+.br
+.RI "Destructor for the \fBSystem\fP class\&. "
+.ti -1c
+.RI "const string \fBgetName\fP () const"
+.br
+.RI "Gets the name of the system\&. "
+.ti -1c
+.RI "double \fBgetValue\fP () const"
+.br
+.RI "Retrieves the current value of the system\&. "
+.ti -1c
+.RI "void \fBsetValue\fP (double value)"
+.br
+.RI "Sets the current value of the system\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents an individual system within a simulation model\&. 
+
+The \fBSystem\fP class encapsulates the state of a system, including its name and a value representing the current state or quantity being modeled\&. This value can be modified or retrieved as needed\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "System::System ()"
+
+.PP
+Default constructor for the \fBSystem\fP class\&. Initializes a \fBSystem\fP object with an empty name and a value of 0\&. 
+.nf
+4     : name(""), value(0\&.0) {}
+.PP
+.fi
+
+.SS "System::System (const string & name)"
+
+.PP
+Constructs a system with a specified name\&. Initializes the system with the given name and a default value of 0\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name of the system\&. 
+.RE
+.PP
+
+.nf
+7     : name(name), value(0\&.0) {}
+.PP
+.fi
+
+.SS "System::System (const string & name, double value)"
+
+.PP
+Constructs a system with a name and value\&. Initializes a \fBSystem\fP object with a given name and value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The system's name\&. 
+.br
+\fIvalue\fP The initial value of the system\&. 
+.RE
+.PP
+
+.nf
+10     : name(name), value(value) {}
+.PP
+.fi
+
+.SS "System::System (const \fBSystem\fP & other)"
+
+.PP
+Copy constructor for the \fBSystem\fP class\&. Initializes a \fBSystem\fP object as a copy of another \fBSystem\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIother\fP \fBSystem\fP object to copy\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBSystem\fP object\&. 
+.RE
+.PP
+
+.nf
+13     : name(other\&.name), value(other\&.value) {}
+.PP
+.fi
+
+.SS "System::~System ()\fR [virtual]\fP"
+
+.PP
+Destructor for the \fBSystem\fP class\&. Destroys a \fBSystem\fP object\&. 
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+23 {}
+.PP
+.fi
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const string System::getName () const"
+
+.PP
+Gets the name of the system\&. Returns the name of the system\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The name of the system as a string\&. 
+.RE
+.PP
+
+.nf
+25                                    {
+26     return name;
+27 }
+.PP
+.fi
+
+.SS "double System::getValue () const"
+
+.PP
+Retrieves the current value of the system\&. Returns the value of the system\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The value of the system as a double\&. 
+.RE
+.PP
+
+.nf
+29                               {
+30     return value;
+31 }
+.PP
+.fi
+
+.SS "\fBSystem\fP & System::operator= (const \fBSystem\fP & other)"
+
+.PP
+Assignment operator for the \fBSystem\fP class\&. Assigns values from another system to this one\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIother\fP Another instance of \fBSystem\fP to be assigned\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to this \fBSystem\fP\&. 
+.RE
+.PP
+
+.nf
+15                                              {
+16     if (this != &other) {
+17         name = other\&.name;
+18         value = other\&.value;
+19     }
+20     return *this;
+21 }
+.PP
+.fi
+
+.SS "void System::setValue (double value)"
+
+.PP
+Sets the current value of the system\&. Sets the value of the system to a given value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP The new value to be assigned to the system\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+33                                   {
+34     this\->value = value;
+35 }
+.PP
+.fi
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.

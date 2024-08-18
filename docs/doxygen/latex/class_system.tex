@@ -1,0 +1,241 @@
+\doxysection{System Class Reference}
+\hypertarget{class_system}{}\label{class_system}\index{System@{System}}
+
+
+Represents an individual system within a simulation model.  
+
+
+
+
+{\ttfamily \#include $<$system.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_system_ae317936c9bcf1374d61745572e0f2f8a}{System}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_system}{System} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_system_af8475274ed3112b6d9bf064308069dcb}{System}} (const string \&name)
+\begin{DoxyCompactList}\small\item\em Constructs a system with a specified name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_system_a50d3e361c713dd28322b616ee229d4f3}{System}} (const string \&name, double value)
+\begin{DoxyCompactList}\small\item\em Constructs a system with a name and value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_system_ae95d7374f80fdfaee096e95c1abc438c}{System}} (const \mbox{\hyperlink{class_system}{System}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor for the \doxylink{class_system}{System} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_system}{System}} \& \mbox{\hyperlink{class_system_ac6422081d08c3ac145a6d7c6d9f5bae7}{operator=}} (const \mbox{\hyperlink{class_system}{System}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator for the \doxylink{class_system}{System} class. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_system_a3be70bb338e3f062f821173fd15680d0}{\texorpdfstring{$\sim$}{\string~}\+System}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_system}{System} class. \end{DoxyCompactList}\item 
+const string \mbox{\hyperlink{class_system_a703d2f8140d276094d078f1b9c229638}{get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name of the system. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_system_aa7d17369d1034e7d8643a63f69d1901d}{get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the current value of the system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_system_a5343de0a45485edd88bc87f338fe9a19}{set\+Value}} (double value)
+\begin{DoxyCompactList}\small\item\em Sets the current value of the system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an individual system within a simulation model. 
+
+The \doxylink{class_system}{System} class encapsulates the state of a system, including its name and a value representing the current state or quantity being modeled. This value can be modified or retrieved as needed. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_system_ae317936c9bcf1374d61745572e0f2f8a}\index{System@{System}!System@{System}}
+\index{System@{System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{class_system_ae317936c9bcf1374d61745572e0f2f8a} 
+System\+::\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for the \doxylink{class_system}{System} class. 
+
+Initializes a \doxylink{class_system}{System} object with an empty name and a value of 0. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ \ \ \ \ :\ name(\textcolor{stringliteral}{"{}"{}}),\ value(0.0)\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_af8475274ed3112b6d9bf064308069dcb}\index{System@{System}!System@{System}}
+\index{System@{System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{class_system_af8475274ed3112b6d9bf064308069dcb} 
+System\+::\+System (\begin{DoxyParamCaption}\item[{const string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a system with a specified name. 
+
+Initializes the system with the given name and a default value of 0. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ \ \ \ \ :\ name(name),\ value(0.0)\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_a50d3e361c713dd28322b616ee229d4f3}\index{System@{System}!System@{System}}
+\index{System@{System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{class_system_a50d3e361c713dd28322b616ee229d4f3} 
+System\+::\+System (\begin{DoxyParamCaption}\item[{const string \&}]{name}{, }\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a system with a name and value. 
+
+Initializes a \doxylink{class_system}{System} object with a given name and value. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The system\textquotesingle{}s name. \\
+\hline
+{\em value} & The initial value of the system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ :\ name(name),\ value(value)\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_ae95d7374f80fdfaee096e95c1abc438c}\index{System@{System}!System@{System}}
+\index{System@{System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{class_system_ae95d7374f80fdfaee096e95c1abc438c} 
+System\+::\+System (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_system}{System}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor for the \doxylink{class_system}{System} class. 
+
+Initializes a \doxylink{class_system}{System} object as a copy of another \doxylink{class_system}{System} object. 
+\begin{DoxyParams}{Parameters}
+{\em other} & \doxylink{class_system}{System} object to copy. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_system}{System} object. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \ \ \ \ :\ name(other.name),\ value(other.value)\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_a3be70bb338e3f062f821173fd15680d0}\index{System@{System}!````~System@{\texorpdfstring{$\sim$}{\string~}System}}
+\index{````~System@{\texorpdfstring{$\sim$}{\string~}System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}System()}{\string~System()}}
+{\footnotesize\ttfamily \label{class_system_a3be70bb338e3f062f821173fd15680d0} 
+System\+::\texorpdfstring{$\sim$}{\string~}\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor for the \doxylink{class_system}{System} class. 
+
+Destroys a \doxylink{class_system}{System} object. \begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_system_a703d2f8140d276094d078f1b9c229638}\index{System@{System}!getName@{getName}}
+\index{getName@{getName}!System@{System}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{class_system_a703d2f8140d276094d078f1b9c229638} 
+const string System\+::get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name of the system. 
+
+Returns the name of the system. \begin{DoxyReturn}{Returns}
+The name of the system as a string. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ name;}
+\DoxyCodeLine{00027\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_aa7d17369d1034e7d8643a63f69d1901d}\index{System@{System}!getValue@{getValue}}
+\index{getValue@{getValue}!System@{System}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily \label{class_system_aa7d17369d1034e7d8643a63f69d1901d} 
+double System\+::get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the current value of the system. 
+
+Returns the value of the system. \begin{DoxyReturn}{Returns}
+The value of the system as a double. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00031\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_ac6422081d08c3ac145a6d7c6d9f5bae7}\index{System@{System}!operator=@{operator=}}
+\index{operator=@{operator=}!System@{System}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_system_ac6422081d08c3ac145a6d7c6d9f5bae7} 
+\mbox{\hyperlink{class_system}{System}} \& System\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_system}{System}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator for the \doxylink{class_system}{System} class. 
+
+Assigns values from another system to this one. 
+\begin{DoxyParams}{Parameters}
+{\em other} & Another instance of \doxylink{class_system}{System} to be assigned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this \doxylink{class_system}{System}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ name\ =\ other.name;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ value\ =\ other.value;}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_system_a5343de0a45485edd88bc87f338fe9a19}\index{System@{System}!setValue@{setValue}}
+\index{setValue@{setValue}!System@{System}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}}
+{\footnotesize\ttfamily \label{class_system_a5343de0a45485edd88bc87f338fe9a19} 
+void System\+::set\+Value (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the current value of the system. 
+
+Sets the value of the system to a given value. 
+\begin{DoxyParams}{Parameters}
+{\em value} & The new value to be assigned to the system. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ this-\/>value\ =\ value;}
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/dev/bccb33-\/workspace/my\+Vensim/src/\mbox{\hyperlink{system_8hpp}{system.\+hpp}}\item 
+E\+:/dev/bccb33-\/workspace/my\+Vensim/src/\mbox{\hyperlink{system_8cpp}{system.\+cpp}}\end{DoxyCompactItemize}

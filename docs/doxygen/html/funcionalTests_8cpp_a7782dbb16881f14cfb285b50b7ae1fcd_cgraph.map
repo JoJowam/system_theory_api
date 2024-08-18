@@ -1,0 +1,10 @@
+<map id="logisticFlow" name="logisticFlow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,96,83"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="23,57,19,47,22,38,33,32,51,29,69,32,79,39,76,43,67,37,50,35,35,37,26,41,24,47,28,54"/>
+<area shape="rect" id="Node000002" href="$classModel.html#a302d4ed93c6e6f9a0f728e021a91f821" title="Adds a system to the model." alt="" coords="163,5,249,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,53,147,35,149,40,95,58"/>
+<area shape="rect" id="Node000003" href="$classModel.html#ac9bcc9805d2b2c18a3e93b0723ccc40e" title="Executes the model simulation over a specified time range." alt="" coords="151,56,261,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="96,67,135,67,135,72,96,72"/>
+<area shape="rect" id="Node000004" href="$classSystem.html#aa7d17369d1034e7d8643a63f69d1901d" title="Retrieves the current value of the system." alt="" coords="144,107,268,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="95,81,149,99,147,104,93,86"/>
+</map>

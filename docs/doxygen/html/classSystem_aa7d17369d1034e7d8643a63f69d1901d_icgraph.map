@@ -1,0 +1,19 @@
+<map id="System::getValue" name="System::getValue">
+<area shape="rect" id="Node000001" title="Retrieves the current value of the system." alt="" coords="325,107,449,133"/>
+<area shape="rect" id="Node000002" href="$funcionalTests_8cpp.html#ad495082fa247fddc617a8a39db6f5845" title=" " alt="" coords="141,5,239,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="356,99,319,72,276,46,238,32,240,27,278,42,322,67,359,94"/>
+<area shape="rect" id="Node000004" href="$classExponentialFlow.html#a64cb5390325a3ae7113c004e9c19dd02" title="Calculates the flow between the source and destination systems." alt="" coords="103,56,277,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="317,105,244,86,245,81,318,100"/>
+<area shape="rect" id="Node000005" href="$classLogisticFlow.html#a482f40ae085ce2f5b3b248748826a6a5" title="Calculates the flow between the source and destination systems." alt="" coords="114,107,266,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="310,123,266,123,266,117,310,117"/>
+<area shape="rect" id="Node000006" href="$funcionalTests_8cpp.html#a0c9e48f24b36557221863159aa64f4b6" title=" " alt="" coords="132,181,248,208"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="336,142,228,183,226,178,334,137"/>
+<area shape="rect" id="Node000007" href="$funcionalTests_8cpp.html#a7782dbb16881f14cfb285b50b7ae1fcd" title=" " alt="" coords="145,256,235,283"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="364,147,325,184,279,222,220,258,217,253,275,218,322,180,360,143"/>
+<area shape="rect" id="Node000003" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,181,55,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,33,104,46,77,78,57,116,44,153,37,181,31,180,39,151,52,114,72,75,101,42,125,28"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="117,197,55,197,55,192,117,192"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="217,168,207,162,190,160,173,162,165,167,163,172,167,180,162,182,157,173,161,163,172,157,190,155,209,157,220,164"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="145,251,54,208,56,204,147,247"/>
+<area shape="poly" id="edge9_Node000007_Node000007" title=" " alt="" coords="217,243,207,237,190,235,173,237,165,241,163,247,167,254,162,257,157,247,161,238,172,232,190,229,209,232,220,239"/>
+</map>

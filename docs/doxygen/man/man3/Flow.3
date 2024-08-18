@@ -1,0 +1,320 @@
+.TH "Flow" 3 "Version v0.1.0" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Flow \- Represents a flow of resources or energy between two systems in a simulation model\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <flow\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFlow\fP ()"
+.br
+.RI "Default constructor for the \fBFlow\fP class\&. "
+.ti -1c
+.RI "\fBFlow\fP (const string &\fBname\fP, \fBSystem\fP *\fBsource\fP=nullptr, \fBSystem\fP *\fBdestination\fP=nullptr)"
+.br
+.RI "Constructs a \fBFlow\fP with a specified name, source, and destination systems\&. "
+.ti -1c
+.RI "\fBFlow\fP (const string &\fBname\fP)"
+.br
+.RI "Constructs a \fBFlow\fP with a specified name\&. "
+.ti -1c
+.RI "\fBFlow\fP (const \fBFlow\fP &other)"
+.br
+.RI "Copy constructor for the \fBFlow\fP class\&. "
+.ti -1c
+.RI "\fBFlow\fP & \fBoperator=\fP (const \fBFlow\fP &other)"
+.br
+.RI "Assignment operator for the \fBFlow\fP class\&. "
+.ti -1c
+.RI "virtual \fB~Flow\fP ()"
+.br
+.RI "Destructor for the \fBFlow\fP class\&. "
+.ti -1c
+.RI "const string & \fBgetName\fP () const"
+.br
+.RI "Retrieves the name of the flow\&. "
+.ti -1c
+.RI "\fBSystem\fP * \fBgetSource\fP () const"
+.br
+.RI "Gets the source system of the flow\&. "
+.ti -1c
+.RI "\fBSystem\fP * \fBgetDestination\fP () const"
+.br
+.RI "Gets the destination system of the flow\&. "
+.ti -1c
+.RI "void \fBsetSource\fP (\fBSystem\fP *\fBsource\fP)"
+.br
+.RI "Sets the source system of the flow\&. "
+.ti -1c
+.RI "void \fBsetDestination\fP (\fBSystem\fP *\fBdestination\fP)"
+.br
+.RI "Sets the destination system of the flow\&. "
+.ti -1c
+.RI "virtual double \fBequation\fP () const =0"
+.br
+.RI "Calculates the flow between the source and destination systems\&. "
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBname\fP"
+.br
+.ti -1c
+.RI "\fBSystem\fP * \fBsource\fP"
+.br
+.ti -1c
+.RI "\fBSystem\fP * \fBdestination\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a flow of resources or energy between two systems in a simulation model\&. 
+
+The \fBFlow\fP class models the transfer of resources or energy between two systems, designated as the source and destination systems\&. The name of the flow helps in identifying it within the model\&. Derived classes must implement the equation method to define the specific calculation of the flow\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBSystem\fP 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Flow::Flow ()"
+
+.PP
+Default constructor for the \fBFlow\fP class\&. Initializes a \fBFlow\fP object with an empty name and null pointers for the source and destination systems\&. 
+.nf
+4     : name(""), source(nullptr), destination(nullptr) {}
+.PP
+.fi
+
+.SS "Flow::Flow (const string & name, \fBSystem\fP * source = \fRnullptr\fP, \fBSystem\fP * destination = \fRnullptr\fP)"
+
+.PP
+Constructs a \fBFlow\fP with a specified name, source, and destination systems\&. If the source or destination is not provided, they are initialized to null\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name identifier for the flow\&. 
+.br
+\fIsource\fP Pointer to the source system (optional, default is nullptr)\&. 
+.br
+\fIdestination\fP Pointer to the destination system (optional, default is nullptr)\&. 
+.RE
+.PP
+
+.nf
+7     : name(name), source(source), destination(destination) {}
+.PP
+.fi
+
+.SS "Flow::Flow (const string & name)"
+
+.PP
+Constructs a \fBFlow\fP with a specified name\&. Initializes the flow with the given name and no source or destination\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name identifier for the flow\&. 
+.RE
+.PP
+
+.nf
+10     : name(name), source(nullptr), destination(nullptr) {}
+.PP
+.fi
+
+.SS "Flow::Flow (const \fBFlow\fP & other)"
+
+.PP
+Copy constructor for the \fBFlow\fP class\&. Initializes a \fBFlow\fP object as a copy of another \fBFlow\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIother\fP \fBFlow\fP object to copy\&. 
+.RE
+.PP
+
+.nf
+13     : name(other\&.name), source(other\&.source), destination(other\&.destination) {}
+.PP
+.fi
+
+.SS "Flow::~Flow ()\fR [virtual]\fP"
+
+.PP
+Destructor for the \fBFlow\fP class\&. Destroys a \fBFlow\fP object\&. 
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+24 {}
+.PP
+.fi
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual double Flow::equation () const\fR [pure virtual]\fP"
+
+.PP
+Calculates the flow between the source and destination systems\&. Derived classes must override this method to define the specific flow calculation\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The flow energy value tranference between the source and destination systems\&. 
+.RE
+.PP
+
+.SS "\fBSystem\fP * Flow::getDestination () const"
+
+.PP
+Gets the destination system of the flow\&. Returns the destination system of the flow\&. 
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the destination system\&. 
+.RE
+.PP
+
+.nf
+42                                    {
+43     return destination;
+44 }
+.PP
+.fi
+
+.SS "const string & Flow::getName () const"
+
+.PP
+Retrieves the name of the flow\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The flow's name as a constant reference to a string\&. 
+.RE
+.PP
+
+.nf
+26                                   {
+27     return name;
+28 }
+.PP
+.fi
+
+.SS "\fBSystem\fP * Flow::getSource () const"
+
+.PP
+Gets the source system of the flow\&. Returns the source system of the flow\&. 
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the source system\&. 
+.RE
+.PP
+
+.nf
+38                               {
+39     return source;
+40 }
+.PP
+.fi
+
+.SS "\fBFlow\fP & Flow::operator= (const \fBFlow\fP & other)"
+
+.PP
+Assignment operator for the \fBFlow\fP class\&. Assigns one \fBFlow\fP object to another\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIother\fP Another instance of \fBFlow\fP to be assigned\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to this \fBFlow\fP instance\&. 
+.RE
+.PP
+
+.nf
+15                                        {
+16     if (this != &other) {
+17         name = other\&.name;
+18         source = other\&.source;
+19         destination = other\&.destination;
+20     }
+21     return *this;
+22 }
+.PP
+.fi
+
+.SS "void Flow::setDestination (\fBSystem\fP * destination)"
+
+.PP
+Sets the destination system of the flow\&. Sets the value of the system to a given value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdestination\fP a pointer to the destination system\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+34                                              {
+35     this\->destination = destination;
+36 }
+.PP
+.fi
+
+.SS "void Flow::setSource (\fBSystem\fP * source)"
+
+.PP
+Sets the source system of the flow\&. Sets the value of the system to a given value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsource\fP A pointer to the source system\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+None\&. 
+.RE
+.PP
+
+.nf
+30                                    {
+31     this\->source = source;
+32 }
+.PP
+.fi
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBSystem\fP* Flow::destination\fR [protected]\fP"
+Destination system of the flow\&. 
+.SS "string Flow::name\fR [protected]\fP"
+Name of the flow\&. 
+.SS "\fBSystem\fP* Flow::source\fR [protected]\fP"
+Source system of the flow\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.

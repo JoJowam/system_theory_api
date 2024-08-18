@@ -1,0 +1,9 @@
+<map id="LogisticFlow" name="LogisticFlow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="26,188,121,215"/>
+<area shape="rect" id="Node000002" href="$classFlow.html" title="Represents a flow of resources or energy between two systems in a simulation model." alt="" coords="49,112,98,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,154,76,188,71,188,71,154"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,59,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="40,46,53,87,67,111,62,113,48,89,35,48"/>
+<area shape="rect" id="Node000004" href="$classSystem.html" title="Represents an individual system within a simulation model." alt="" coords="83,5,149,32"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="108,47,81,113,76,111,103,45"/>
+</map>
