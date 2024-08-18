@@ -1,21 +1,18 @@
 #include "funcionalTests.hpp"
-#include <iostream>
-#include <cassert>
-#include <cmath>
 
-//ExponentialFlow Implementation
+//ExponentialFlow Implementation.
 ExponentialFlow::ExponentialFlow() 
-    : Flow() {}
+    : FlowImpl() {}
 
 ExponentialFlow::ExponentialFlow(const std::string& name, System* source, System* destination) 
-    : Flow(name, source, destination) {}
+    : FlowImpl(name, source, destination) {}
 
 ExponentialFlow::ExponentialFlow(const ExponentialFlow& other) 
-    : Flow(other) {}
+    : FlowImpl(other) {}
 
 ExponentialFlow& ExponentialFlow::operator=(const ExponentialFlow& other) {
     if (this != &other) {
-        Flow::operator=(other);
+        FlowImpl::operator=(other);
     }
     return *this;
 }
@@ -29,19 +26,19 @@ double ExponentialFlow::equation() const {
     return 0.0;
 }
 
-//LogisticFlow Implementation
+//LogisticFlow Implementation.
 LogisticFlow::LogisticFlow() 
-    : Flow() {}
+    : FlowImpl() {}
 
 LogisticFlow::LogisticFlow(const std::string& name, System* source, System* destination) 
-    : Flow(name, source, destination) {}
+    : FlowImpl(name, source, destination) {}
 
 LogisticFlow::LogisticFlow(const LogisticFlow& other) 
-    : Flow(other) {}
+    : FlowImpl(other) {}
 
 LogisticFlow& LogisticFlow::operator=(const LogisticFlow& other) {
     if (this != &other) {
-        Flow::operator=(other);
+        FlowImpl::operator=(other);
     }
     return *this;
 }
@@ -55,26 +52,22 @@ double LogisticFlow::equation() const {
     return 0.0;
 }
 
-//Tests Implementation
+//Tests Implementation.
 void exponentialFlow() {
     std::cout << "Starting Exponential Flow Test..." << std::endl;
-    //System build
-    System* population1 = new System("pop1", 100);
-    System* population2 = new System("pop2", 0);
 
-    //Flow build
+    System* population1 = new SystemImpl("pop1", 100);
+    System* population2 = new SystemImpl("pop2", 0);
+
     ExponentialFlow* exponentialFlow = new ExponentialFlow("exponential", population1, population2);
 
-    //Model build and assignments
-    Model* model = new Model();
+    Model* model = new ModelImpl();
     model->add(population1);
     model->add(population2);
     model->add(exponentialFlow);
 
-    //Model execution
     model->execute(0, 100, 1);
 
-    //Asserts
     assert(fabs((round((population1->getValue() * 10000)) - 10000 * 36.6032)) < 0.0001);
     assert(fabs((round((population2->getValue() * 10000)) - 10000 * 63.3968)) < 0.0001);
 
@@ -83,20 +76,17 @@ void exponentialFlow() {
 
 void logisticFlow() {
     std::cout << "Starting Logistic Flow Test..." << std::endl;
-    //System build
-    System* p1 = new System("p1", 100);
-    System* p2 = new System("p2", 10);
 
-    //Flow build
+    System* p1 = new SystemImpl("p1", 100);
+    System* p2 = new SystemImpl("p2", 10);
+
     LogisticFlow* logisticFlow = new LogisticFlow("logistic", p1, p2);
 
-    //Model build and assignments
-    Model* model = new Model();
+    Model* model = new ModelImpl();
     model->add(p1);
     model->add(p2);
     model->add(logisticFlow);
 
-    //Model execution
     model->execute(0, 100, 1);
 
     assert(fabs((round((p1->getValue() * 10000)) - 10000 * 88.2167)) < 0.0001);
@@ -107,14 +97,13 @@ void logisticFlow() {
 
 void complexFlow() {
     std::cout << "Starting Complex Flow Test..." << std::endl;
-    //System build
-    System* q1 = new System("Q1", 100);
-    System* q2 = new System("Q2", 0);
-    System* q3 = new System("Q3", 100);
-    System* q4 = new System("Q4", 0);
-    System* q5 = new System("Q5", 0);
 
-    //Flow build
+    System* q1 = new SystemImpl("Q1", 100);
+    System* q2 = new SystemImpl("Q2", 0);
+    System* q3 = new SystemImpl("Q3", 100);
+    System* q4 = new SystemImpl("Q4", 0);
+    System* q5 = new SystemImpl("Q5", 0);
+
     ExponentialFlow* f = new ExponentialFlow("f", q1, q2);
     ExponentialFlow* g = new ExponentialFlow("g", q1, q3);
     ExponentialFlow* r = new ExponentialFlow("r", q2, q5);
@@ -122,8 +111,7 @@ void complexFlow() {
     ExponentialFlow* u = new ExponentialFlow("u", q3, q4);
     ExponentialFlow* v = new ExponentialFlow("v", q4, q1);
 
-    //Model build and assignments
-    Model* model = new Model();
+    Model* model = new ModelImpl();
     model->add(q1);
     model->add(q2);
     model->add(q3);
@@ -136,7 +124,6 @@ void complexFlow() {
     model->add(u);
     model->add(v);
 
-    //Model execution
     model->execute(0, 100, 1);
 
     assert(fabs((round((q1->getValue() * 10000)) - 10000 * 31.8513)) < 0.0001);

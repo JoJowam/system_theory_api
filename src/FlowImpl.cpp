@@ -1,18 +1,15 @@
-#include "flow.hpp"
+#include "FlowImpl.hpp"
 
-Flow::Flow() 
+FlowImpl::FlowImpl() 
     : name(""), source(nullptr), destination(nullptr) {}
 
-Flow::Flow(const string& name, System* source, System* destination) 
+FlowImpl::FlowImpl(const string& name, System* source, System* destination) 
     : name(name), source(source), destination(destination) {}
 
-Flow::Flow(const string& name) 
-    : name(name), source(nullptr), destination(nullptr) {}
-
-Flow::Flow(const Flow& other) 
+FlowImpl::FlowImpl(const FlowImpl& other) 
     : name(other.name), source(other.source), destination(other.destination) {}
 
-Flow& Flow::operator=(const Flow& other) {
+FlowImpl& FlowImpl::operator=(const FlowImpl& other) {
     if (this != &other) {
         name = other.name;
         source = other.source;
@@ -21,24 +18,24 @@ Flow& Flow::operator=(const Flow& other) {
     return *this;
 }
 
-Flow::~Flow() {}
+FlowImpl::~FlowImpl() {}
 
-const string& Flow::getName() const {
+const string& FlowImpl::getName() const {
     return name;
 }
 
-void Flow::setSource(System* source) {
+void FlowImpl::setSource(System* source) {
     this->source = source;
 }
 
-void Flow::setDestination(System* destination) {
+void FlowImpl::setDestination(System* destination) {
     this->destination = destination;
 }
 
-System* Flow::getSource() const {
+System* FlowImpl::getSource() const {
     return source;
 }
 
-System* Flow::getDestination() const {
+System* FlowImpl::getDestination() const {
     return destination;
 }

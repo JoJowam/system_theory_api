@@ -1,16 +1,7 @@
-
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include <algorithm>
-
-using std::vector;
-
-class System;
-class Flow;
+#include "Flow.hpp"
 
 /**
  * @class Model 
@@ -21,43 +12,14 @@ class Flow;
  * @see System 
  * @see Flow
 */
-
-class Model{
-    private:
-        vector<System*> systems; /**< Vector storing pointers to the systems within the model. */
-        vector<Flow*> flows; /**< Vector storing pointers to the flows within the model. */
-
-        typedef vector<System*>::iterator SystemIterator; /**< Typedef for an iterator for the systems vector. */
-        typedef vector<Flow*>::iterator FlowIterator; /**< Typedef for an iterator for the flows vector.*/
-
+class Model {
     public:
-        /**
-         * @brief Default constructor for the Model class.
-         * @details Initializes a Model object with no systems or flows.
-         */
-        Model();
-
-        /**
-         * @brief Copy constructor for the Model class.
-         * @details Initializes a Model object as a copy of another Model object.
-         * @param other Model object to copy.
-         */
-        Model(const Model& other);
-
-        /**
-         * @brief Assignment operator for the Model class.
-         * @details Assigns one Model object to another.
-         * @param other Another instance of Model to be assigned.
-         * @return A reference to this Model instance.
-         */
-        Model& operator=(const Model& other);
-
         /**
          * @brief Destructor for the Model class.
          * @details Destroys a Model object.
          * @return None.
          */
-        virtual ~Model();
+        virtual ~Model() {}
 
         /**
          * @brief Adds a system to the model.
@@ -65,7 +27,7 @@ class Model{
          * @param system Pointer to the system to be added.
          * @return None.
          */
-        void add(System* system);
+        virtual void add(System* system) = 0;
 
         /**
          * @brief Adds a flow to the model.
@@ -73,7 +35,7 @@ class Model{
          * @param flow Pointer to the Flow object to be added.
          * @return None.
          */
-        void add(Flow* flow);
+        virtual void add(Flow* flow) = 0;
 
         /**
          * @brief Executes the model simulation over a specified time range.
@@ -83,7 +45,7 @@ class Model{
          * @param timeStep The increment in time between each execution step.
          * @return None.
          */
-        void execute(int startTime, int endTime, int timeStep);
+        virtual void execute(int startTime, int endTime, int timeStep) = 0;
 };
 
 #endif
