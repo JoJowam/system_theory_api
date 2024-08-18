@@ -7,15 +7,13 @@ MyFLow vai implementar o método execute
 
 Criar classe UnitSystem
 
-
 Flow.hpp > FLow.cpp > MyFLow.cpp/hpp
 FLow > FlowImpl > MyFLow
 
-
 Class System{
     public:
-    float getValue();
-    friend Class UnitSystem;
+        float getValue();
+        friend Class UnitSystem;
 }
 
 Class UnitSystem{

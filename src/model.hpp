@@ -3,6 +3,12 @@
 
 #include "Flow.hpp"
 
+#include <string>
+#include <vector>
+
+using std::string;
+using std::vector;
+
 /**
  * @class Model 
  * @brief Represents a simulation model containing systems and flows.
@@ -18,7 +24,7 @@ class Model {
          * @brief Destructor for the Model class.
          * @details Destroys a Model object.
          * @return None.
-         */
+        */
         virtual ~Model() {}
 
         /**
@@ -34,8 +40,32 @@ class Model {
          * @details Adds a flow to the model by storing a pointer to the flow in the flows vector.
          * @param flow Pointer to the Flow object to be added.
          * @return None.
-         */
+        */
         virtual void add(Flow* flow) = 0;
+
+        /**
+         * @brief Sets the name of the model.
+         * @param modelName Name of the model.
+        */
+        virtual void setName(const string& modelName) = 0;
+
+        /**
+         * @brief Gets the name of the model.
+         * @return Name of the model.
+         */
+        virtual string getName() const = 0;
+        
+        /**
+         * @brief Gets all systems in the model.
+         * @return Vector of pointers to systems in the model.
+        */
+        virtual vector<System*> getSystems() const = 0;
+
+        /**
+         * @brief Gets all flows in the model.
+         * @return Vector of pointers to flows in the model.
+        */
+        virtual vector<Flow*> getFlows() const = 0;
 
         /**
          * @brief Executes the model simulation over a specified time range.
@@ -45,6 +75,19 @@ class Model {
          * @param timeStep The increment in time between each execution step.
          * @return None.
          */
+
+        /**
+         * @brief Gets the current time of the model.
+         * @return Current time of the model.
+        */
+        virtual int getCurrentTime() const = 0;
+
+        /**
+         * @brief Sets the current time of the model.
+         * @param time The time to be set as current time.
+        */
+        virtual void setCurrentTime(int time) = 0;
+
         virtual void execute(int startTime, int endTime, int timeStep) = 0;
 };
 

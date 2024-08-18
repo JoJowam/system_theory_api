@@ -11,6 +11,7 @@ using std::string;
  * @see System
  */
 class SystemImpl : public System {
+    friend class UnitSystem;
     private:
         string name;    /**< Name of the system. */
         double value;   /**< Current energy value of the system. */

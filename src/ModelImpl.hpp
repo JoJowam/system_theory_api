@@ -6,10 +6,11 @@
 #include "Flow.hpp"
 
 #include <algorithm>
-#include <vector>
 
 using std::vector;
+using std::string;
 
+using namespace std;
 
 /**
  * @class ModelImpl
@@ -19,12 +20,15 @@ using std::vector;
  * @see Flow
 */
 class ModelImpl : public Model {
+    friend class ModelTest;
     private:
+        string name;                /**< Name of the model. */
         vector<System*> systems;   /**< Vector storing pointers to the systems within the model. */
         vector<Flow*> flows;      /**< Vector storing pointers to the flows within the model. */
+        int currentTime;         /**< Current time in the simulation. */
 
-        typedef vector<System*>::iterator SystemIterator; /**< Typedef for an iterator for the systems vector. */
-        typedef vector<Flow*>::iterator FlowIterator; /**< Typedef for an iterator for the flows vector.*/
+        typedef vector<System*>::iterator SystemIterator;    /**< Typedef for an iterator for the systems vector. */
+        typedef vector<Flow*>::iterator FlowIterator;       /**< Typedef for an iterator for the flows vector.*/
     public:
 
         /**
@@ -32,6 +36,13 @@ class ModelImpl : public Model {
          * @details Initializes a Model object with no systems or flows.
         */
         ModelImpl();
+
+        /**
+         * @brief Constructs a model with a specified name.
+         * @details Initializes the model with the given name and no systems or flows.
+         * @param name The name of the model.
+        */
+        ModelImpl(const string& name);
 
         /**
          * @brief Copy constructor for the Model class.
@@ -52,6 +63,16 @@ class ModelImpl : public Model {
 
         void add(System* system) override;
         void add(Flow* flow) override;
+
+        void setName(const string& modelName) override;
+        string getName() const override;
+
+        vector<System*> getSystems() const override;
+        vector<Flow*> getFlows() const override;
+
+        int getCurrentTime() const override;
+        void setCurrentTime(int time) override;
+
         void execute(int startTime, int endTime, int timeStep) override;
 };
 
