@@ -1,0 +1,30 @@
+flowimpl herda da superclasse flow 
+f* = new myflow 
+
+FLow interface (Uma superclasse com todos os métodos virtuais menos o destrutor, ele deve ser implementado e herdado em flow_impl)
+flowimpl .hpp (Vai implementar flow e todos os métodos virtuais)
+MyFLow vai implementar o método execute
+
+Criar classe UnitSystem
+
+
+Flow.hpp > FLow.cpp > MyFLow.cpp/hpp
+FLow > FlowImpl > MyFLow
+
+
+Class System{
+    public:
+    float getValue();
+    friend Class UnitSystem;
+}
+
+Class UnitSystem{
+    public:
+        bool getValue(){
+            System* system
+            assert();
+            return true;
+        }
+}
+
+* Adicionar relogio dentro da classe model e tira-lo do método execute
