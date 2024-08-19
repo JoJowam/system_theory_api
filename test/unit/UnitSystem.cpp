@@ -2,30 +2,42 @@
 #include <cassert>
 #include <iostream>
 
-void UnitSystem::runTests() {
-    testGetName();
-    testGetValue();
-    testSetValue();
+void UnitSystem::runUnitTests() {
+    assert(unit_testGetName());
+    assert(unit_testGetValue());
+    assert(unit_testSetValue());
 }
 
-void UnitSystem::testGetName() {
-    SystemImpl system("TestSystem", 100.0);
-    assert(system.getName() == "TestSystem");
+bool UnitSystem::unit_testGetName() {
+    System* system = new SystemImpl("TestGetName_System");
+    assert(system->getName() == "TestGetName_System");
+
+    delete system;
 
     std::cout << "System::getName() passed.\n";
+
+    return true;
 }
 
-void UnitSystem::testGetValue() {
-    SystemImpl system("TestSystem", 100.0);
-    assert(system.getValue() == 100.0);
+bool UnitSystem::unit_testGetValue() {
+    System* system = new SystemImpl("TestGetValue_System", 100.0);
+    assert(system->getValue() == 100.0);
+
+    delete system;
 
     std::cout << "System::getValue() passed.\n";
+
+    return true;
 }
 
-void UnitSystem::testSetValue() {
-    SystemImpl system("TestSystem", 100.0);
-    system.setValue(200.0);
-    assert(system.getValue() == 200.0);
+bool UnitSystem::unit_testSetValue() {
+    System* system = new SystemImpl("TestSetValue_System");
+    system->setValue(200.0);
+    assert(system->getValue() == 200.0);
+
+    delete system;
 
     std::cout << "System::setValue() passed.\n";
+
+    return true;
 }

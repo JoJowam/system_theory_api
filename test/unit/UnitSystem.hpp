@@ -33,7 +33,7 @@ class UnitSystem {
          * @assert All assertions in the test methods should pass for the tests to be considered successful.
          * @test Executes all individual test methods to ensure comprehensive testing of the System class.
         */
-        void runTests();
+        void runUnitTests();
 
     private:
         /**
@@ -44,7 +44,7 @@ class UnitSystem {
          * @assert The returned name should be "System1".
          * @test Validates the getName method of the SystemImpl class.
         */
-        void testGetName();
+        bool unit_testGetName();
 
         /**
          * @brief Tests the getValue method.
@@ -54,7 +54,7 @@ class UnitSystem {
          * @assert The returned value should be 100.0.
          * @test Validates the getValue method of the SystemImpl class.
         */
-        void testGetValue();
+        bool unit_testGetValue();
 
         /**
          * @brief Tests the setValue method.
@@ -64,7 +64,7 @@ class UnitSystem {
          * @assert The value retrieved using getValue should match the new value set by setValue.
          * @test Validates the setValue method of the SystemImpl class.
         */
-        void testSetValue();
+        bool unit_testSetValue();
 };
 
 #endif

@@ -7,11 +7,9 @@ int main() {
     UnitModel unitModel;
     UnitSystem unitSystem;
 
-    unitFlow.runTests();
-
-    unitModel.runTests();
-
-    unitSystem.runTests();
+    unitFlow.runUnitTests();
+    unitModel.runUnitTests();
+    unitSystem.runUnitTests();
 
     return 0;
 }

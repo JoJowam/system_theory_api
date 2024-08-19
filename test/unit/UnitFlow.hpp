@@ -37,7 +37,7 @@ class UnitFlow {
          * @assert All test methods should pass without assertion errors.
          * @test Calls each test method to verify the functionality of FlowImpl methods.
         */
-        void runTests();
+        void runUnitTests();
     private:
         /**
          * @brief Tests the getName method of FlowImpl.
@@ -46,7 +46,7 @@ class UnitFlow {
          * @assert Expects getName() method to return "TestGetNameFlow".
          * @test Creates a FlowImpl object and tests the getName() method.
         */
-        void testGetName();
+        bool unit_testGetName();
 
         /**
          * @brief Tests the getSource method of FlowImpl.
@@ -55,7 +55,7 @@ class UnitFlow {
          * @assert Expects getSource() method to return the source system pointer.
          * @test Creates a FlowImpl object with a source system and tests the getSource() method.
         */
-        void testGetSource();
+        bool unit_testGetSource();
 
         /**
          * @brief Tests the getDestination method of FlowImpl.
@@ -64,7 +64,7 @@ class UnitFlow {
          * @assert Expects getDestination() method to return the destination system pointer.
          * @test Creates a FlowImpl object with a destination system and tests the getDestination() method.
         */
-        void testGetDestination();
+        bool unit_testGetDestination();
 
         /**
          * @brief Tests the setSource method of FlowImpl.
@@ -73,7 +73,7 @@ class UnitFlow {
          * @assert Expects getSource() method to return the newly set source system.
          * @test Creates a FlowImpl object, sets a source system, and verifies it with getSource().
         */
-        void testSetSource();
+        bool unit_testSetSource();
 
         /**
          * @brief Tests the setDestination method of FlowImpl.
@@ -82,7 +82,7 @@ class UnitFlow {
          * @assert Expects getDestination() method to return the newly set destination system.
          * @test Creates a FlowImpl object, sets a destination system, and verifies it with getDestination().
         */
-        void testSetDestination();
+        bool unit_testSetDestination();
 
         /**
          * @brief Tests the equation method of FlowImpl.
@@ -91,7 +91,7 @@ class UnitFlow {
          * @assert Expects equation() method to return the correct calculated value "1.0".
          * @test Creates a FlowImpl object and verifies the equation method.
         */
-        void testEquation();
+        bool unit_testEquation();
 };
 
 #endif

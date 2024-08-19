@@ -40,7 +40,7 @@ class UnitModel {
          * @assert All assertions in the test methods should pass for the tests to be considered successful.
          * @test Executes all individual test methods to ensure comprehensive testing of the Model class.
         */
-        void runTests();
+        void runUnitTests();
     private:
         /**
          * @brief Tests the setName method.
@@ -50,7 +50,7 @@ class UnitModel {
          * @assert The returned name should be "TestModel".
          * @test Validates the setName and getName methods of the ModelImpl class.
         */
-        void testSetName();
+        bool unit_testSetName();
 
         /**
          * @brief Tests the getName method.
@@ -60,7 +60,7 @@ class UnitModel {
          * @assert The returned name should be an empty string.
          * @test Validates the getName method of the ModelImpl class.
         */
-        void testGetName();
+        bool unit_testGetName();
         /**
          * @brief Tests the addSystem method.
          * @details Creates a ModelImpl object and adds a SystemImpl object to it, then tests if the system is correctly added.
@@ -69,7 +69,7 @@ class UnitModel {
          * @assert The size of the systems vector should be 1 and the contained object should match the added system.
          * @test Validates the addSystem method of the ModelImpl class.
         */
-        void testAddSystem();
+        bool unit_testAddSystem();
 
         /**
          * @brief Tests the addFlow method.
@@ -79,7 +79,7 @@ class UnitModel {
          * @assert The size of the flows vector should be 1 and the contained object should match the added flow.
          * @test Validates the addFlow method of the ModelImpl class.
         */
-        void testAddFlow();
+        bool unit_testAddFlow();
 
         /**
          * @brief Tests the execute method.
@@ -89,7 +89,7 @@ class UnitModel {
          * @assert The value of the source system should decrease and the value of the destination system should increase.
          * @test Validates the execute method of the ModelImpl class.
         */
-        void testExecute();
+        bool unit_testExecute();
 
         /**
          * @brief Tests the getSystems method.
@@ -99,7 +99,7 @@ class UnitModel {
          * @assert The size of the returned systems vector should match the number of added systems.
          * @test Validates the getSystems method of the ModelImpl class.
         */
-        void testGetSystems();
+        bool unit_testGetSystems();
 
         /**
          * @brief Tests the getFlows method.
@@ -109,7 +109,7 @@ class UnitModel {
          * @assert The size of the returned flows vector should match the number of added flows.
          * @test Validates the getFlows method of the ModelImpl class.
         */
-        void testGetFlows();
+        bool unit_testGetFlows();
 
         /**
          * @brief Tests the getCurrentTime method.
@@ -119,7 +119,7 @@ class UnitModel {
          * @assert The returned current time should be 0.
          * @test Validates the getCurrentTime method of the ModelImpl class.
         */
-        void testGetCurrentTime();
+        bool unit_testGetCurrentTime();
 
         /**
          * @brief Tests the setCurrentTime method.
@@ -129,7 +129,7 @@ class UnitModel {
          * @assert The returned current time should be 10.
          * @test Validates the setCurrentTime method of the ModelImpl class.
         */
-        void testSetCurrentTime();
+        bool unit_testSetCurrentTime();
 };
 
 #endif

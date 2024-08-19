@@ -54,8 +54,6 @@ double LogisticFlow::equation() const {
 
 //Tests Implementation.
 void exponentialFlow() {
-    std::cout << "Starting Exponential Flow Test..." << std::endl;
-
     System* population1 = new SystemImpl("pop1", 100);
     System* population2 = new SystemImpl("pop2", 0);
 
@@ -71,12 +69,10 @@ void exponentialFlow() {
     assert(fabs((round((population1->getValue() * 10000)) - 10000 * 36.6032)) < 0.0001);
     assert(fabs((round((population2->getValue() * 10000)) - 10000 * 63.3968)) < 0.0001);
 
-    std::cout << "Exponential Flow Test Completed Successfully..." << std::endl;
+    std::cout << "Exponential Flow test Passed!" << std::endl;
 }
 
 void logisticFlow() {
-    std::cout << "Starting Logistic Flow Test..." << std::endl;
-
     System* p1 = new SystemImpl("p1", 100);
     System* p2 = new SystemImpl("p2", 10);
 
@@ -92,12 +88,10 @@ void logisticFlow() {
     assert(fabs((round((p1->getValue() * 10000)) - 10000 * 88.2167)) < 0.0001);
     assert(fabs((round((p2->getValue() * 10000)) - 10000 * 21.7833)) < 0.0001);
 
-    std::cout << "Logistic Flow Test Completed Successfully." << std::endl;
+    std::cout << "Logistic Flow Test Passed!" << std::endl;
 }
 
 void complexFlow() {
-    std::cout << "Starting Complex Flow Test..." << std::endl;
-
     System* q1 = new SystemImpl("Q1", 100);
     System* q2 = new SystemImpl("Q2", 0);
     System* q3 = new SystemImpl("Q3", 100);
@@ -132,5 +126,5 @@ void complexFlow() {
     assert(fabs((round((q4->getValue() * 10000)) - 10000 * 56.1728)) < 0.0001);
     assert(fabs((round((q5->getValue() * 10000)) - 10000 * 16.4612)) < 0.0001);
 
-    std::cout << "Complex Flow Test Completed Successfully." << std::endl;
+    std::cout << "Complex Flow Test Passed!" << std::endl;
 }

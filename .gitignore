@@ -2,4 +2,6 @@
 
 bin/*
 
-/docs/doxygen/*
+docs/doxygen/*
+!docs/doxygen/Doxyfile
+
