@@ -1,5 +1,17 @@
 #include "UnitModel.hpp"
 
+#include "../../src/ModelImpl.hpp"
+#include "../../src/SystemImpl.hpp"
+#include "../../src/FlowImpl.hpp"
+
+#include <cassert>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using std::vector;
+using std::string;
+
 /**
  * @class UnitTestModelStub
  * @brief Subclass of FlowImpl for testing purposes.
@@ -41,8 +53,6 @@ void UnitModel::runUnitTests() {
     assert(unit_testAddFlow());
     assert(unit_testSetName());
     assert(unit_testGetName());
-    assert(unit_testGetSystems());
-    assert(unit_testGetFlows());
     assert(unit_testGetCurrentTime());
     assert(unit_testSetCurrentTime());
     assert(unit_testExecute());
@@ -73,11 +83,12 @@ bool UnitModel::unit_testSetName() {
 }
 
 bool UnitModel::unit_testAddSystem() {
-    Model* model = new ModelImpl("TestAddSystem_Model");
+    ModelImpl* model = new ModelImpl("TestAddSystem_Model");
     System* system = new SystemImpl("TestAddSystem_System", 100.0);
     model->add(system);
-    assert(model->getSystems().size() == 1);
-    assert(model->getSystems()[0] == system);
+
+    ModelImpl::SystemIterator iterator = std::find(model->systems.begin(), model->systems.end(), system);
+    assert(iterator != model->systems.end());
 
     delete model;
     delete system;
@@ -87,15 +98,16 @@ bool UnitModel::unit_testAddSystem() {
     return true;
 }
 
+
 bool UnitModel::unit_testAddFlow() {
-    Model* model = new ModelImpl("TestAddFlow_Model");
+    ModelImpl* model = new ModelImpl("TestAddFlow_Model");
     System* source = new SystemImpl("TestAddFlow_SourceSystem", 100.0);
     System* destination = new SystemImpl("TestAddFlow_DestinationSystem", 0.0);
     Flow* flow = new UnitTestModelStub("TestAddFlow_Flow", source, destination);
     model->add(flow);
 
-    assert(model->getFlows().size() == 1);
-    assert(model->getFlows()[0] == flow);
+    ModelImpl::FlowIterator it = std::find(model->flows.begin(), model->flows.end(), flow);
+    assert(it != model->flows.end());
 
     delete model;
     delete source;
@@ -103,52 +115,6 @@ bool UnitModel::unit_testAddFlow() {
     delete flow;
 
     std::cout << "Model::unit_add(Flow*) passed.\n";
-
-    return true;
-}
-
-bool UnitModel::unit_testGetSystems() {
-    Model* model = new ModelImpl();
-    System* system1 = new SystemImpl("TestGetSystems_System1", 100.0);
-    System* system2 = new SystemImpl("TestGetSystems_System2", 200.0);
-    model->add(system1);
-    model->add(system2);
-    vector<System*> systems = model->getSystems();
-
-    assert(systems.size() == 2);
-    assert(systems[0] == system1);
-    assert(systems[1] == system2);
-
-    delete model;
-    delete system1;
-    delete system2;
-
-    std::cout << "Model::unit_getSystems() passed.\n";
-
-    return true;
-}
-
-bool UnitModel::unit_testGetFlows() {
-    Model* model = new ModelImpl();
-    System* source = new SystemImpl("TestGetFlows_SourceSystem", 100.0);
-    System* destination = new SystemImpl("TestGetFlows_DestinationSystem", 0.0);
-    Flow* flow1 = new UnitTestModelStub("TestGetFlows_Flow1", source, destination);
-    Flow* flow2 = new UnitTestModelStub("TestGetFlows_Flow2", source, destination);
-    model->add(flow1);
-    model->add(flow2);
-    vector<Flow*> flows = model->getFlows();
-
-    assert(flows.size() == 2);
-    assert(flows[0] == flow1);
-    assert(flows[1] == flow2);
-
-    delete model;
-    delete source;
-    delete destination;
-    delete flow1;
-    delete flow2;
-
-    std::cout << "Model::unit_getFlows() passed.\n";
 
     return true;
 }

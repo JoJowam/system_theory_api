@@ -1,8 +1,6 @@
 #ifndef UNIT_SYSTEM_HPP
 #define UNIT_SYSTEM_HPP
 
-#include "../../src/SystemImpl.hpp"
-
 /**
  * @class UnitSystem
  * @brief Unit tests for the System class.

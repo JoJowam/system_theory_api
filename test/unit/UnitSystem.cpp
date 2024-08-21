@@ -1,4 +1,6 @@
 #include "UnitSystem.hpp"
+#include "../../src/SystemImpl.hpp"
+
 #include <cassert>
 #include <iostream>
 

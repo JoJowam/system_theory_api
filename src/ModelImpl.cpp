@@ -1,4 +1,6 @@
 #include "ModelImpl.hpp"
+
+#include <algorithm>
 #include <iostream>
 
 ModelImpl::ModelImpl() : name(""), currentTime(0) {}
@@ -34,14 +36,6 @@ void ModelImpl::setName(const string& name) {
 
 string ModelImpl::getName() const {
     return name;
-}
-
-vector<System*> ModelImpl::getSystems() const {
-    return systems;
-}
-
-vector<Flow*> ModelImpl::getFlows() const {
-    return flows;
 }
 
 int ModelImpl::getCurrentTime() const {

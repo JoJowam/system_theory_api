@@ -1,5 +1,10 @@
 #include "funcionalTests.hpp"
 
+#include <iostream>
+#include <cassert>
+#include <string>
+#include <cmath>
+
 //ExponentialFlow Implementation.
 ExponentialFlow::ExponentialFlow() 
     : FlowImpl() {}

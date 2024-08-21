@@ -1,17 +1,6 @@
 #ifndef UNIT_MODEL_HPP
 #define UNIT_MODEL_HPP
 
-#include "../../src/ModelImpl.hpp"
-#include "../../src/SystemImpl.hpp"
-#include "../../src/FlowImpl.hpp"
-
-#include <cassert>
-#include <iostream>
-#include <vector>
-
-using std::vector;
-using std::string;
-
 /**
  * @class UnitModel
  * @brief Unit tests for the Model class.
@@ -90,26 +79,6 @@ class UnitModel {
          * @test Validates the execute method of the ModelImpl class.
         */
         bool unit_testExecute();
-
-        /**
-         * @brief Tests the getSystems method.
-         * @details Creates a ModelImpl object and adds multiple SystemImpl objects to it, then tests if the getSystems method returns all systems correctly.
-         * @pre A ModelImpl object must be instantiated with multiple SystemImpl objects added.
-         * @post The systems vector returned by getSystems should contain all added SystemImpl objects.
-         * @assert The size of the returned systems vector should match the number of added systems.
-         * @test Validates the getSystems method of the ModelImpl class.
-        */
-        bool unit_testGetSystems();
-
-        /**
-         * @brief Tests the getFlows method.
-         * @details Creates a ModelImpl object and adds multiple FlowImpl objects to it, then tests if the getFlows method returns all flows correctly.
-         * @pre A ModelImpl object must be instantiated with multiple FlowImpl objects added.
-         * @post The flows vector returned by getFlows should contain all added FlowImpl objects.
-         * @assert The size of the returned flows vector should match the number of added flows.
-         * @test Validates the getFlows method of the ModelImpl class.
-        */
-        bool unit_testGetFlows();
 
         /**
          * @brief Tests the getCurrentTime method.

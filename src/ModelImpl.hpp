@@ -5,8 +5,6 @@
 #include "System.hpp"
 #include "Flow.hpp"
 
-#include <algorithm>
-
 using std::vector;
 using std::string;
 
@@ -27,7 +25,7 @@ using namespace std;
  * @version 0.0.1
  */
 class ModelImpl : public Model {
-    friend class ModelTest;
+    friend class UnitModel;          /**< Friend class for unit testing. */
 
     private:
         string name;                 /**< Name of the model.*/
@@ -109,9 +107,6 @@ class ModelImpl : public Model {
 
         void setName(const string& modelName) override;
         string getName() const override;
-
-        vector<System*> getSystems() const override;
-        vector<Flow*> getFlows() const override;
 
         int getCurrentTime() const override;
         void setCurrentTime(int time) override;

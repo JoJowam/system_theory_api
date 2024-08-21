@@ -1,5 +1,11 @@
 #include "UnitFlow.hpp"
 
+#include "../../src/FlowImpl.hpp"
+#include "../../src/SystemImpl.hpp"
+
+#include <cassert>
+#include <iostream>
+
 /**
  * @class UnitTestFlowStub 
  * @brief Subclass of FlowImpl for testing purposes.

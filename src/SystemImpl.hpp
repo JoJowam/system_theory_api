@@ -22,7 +22,7 @@ using std::string;
  * @version 0.1.3
  */
 class SystemImpl : public System {
-    friend class UnitSystem;
+    friend class UnitSystem;    /**< Friend class for unit testing. */
 
     private:
         string name;    /**< Name of the system. */

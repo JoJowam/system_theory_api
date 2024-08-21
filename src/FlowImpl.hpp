@@ -2,7 +2,7 @@
 #define FLOW_IMPL_HPP
 
 #include "Flow.hpp"
-#include "system.hpp"
+#include "System.hpp"
 
 /**
  * @class FlowImpl
@@ -20,7 +20,7 @@
  * @version 0.1.3
  */
 class FlowImpl : public Flow {
-    friend class UnitFlow;
+    friend class UnitFlow;      /**< Friend class for unit testing. */
 
     protected:
         string name;            /**< Name of the flow. */

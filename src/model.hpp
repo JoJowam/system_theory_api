@@ -9,6 +9,9 @@
 using std::string;
 using std::vector;
 
+class System;
+class Flow;
+
 /**
  * @class Model
  * @brief Represents a simulation model containing systems and flows.
@@ -75,22 +78,6 @@ class Model {
          * @note The name helps in identifying the model.
          */
         virtual string getName() const = 0;
-
-        /**
-         * @brief Gets all systems in the model.
-         * @return A vector of pointers to systems in the model.
-         * 
-         * @note This method returns all systems currently part of the model, useful for iterating through them during simulation steps.
-         */
-        virtual vector<System*> getSystems() const = 0;
-
-        /**
-         * @brief Gets all flows in the model.
-         * @return A vector of pointers to flows in the model.
-         * 
-         * @note This method returns all flows currently part of the model, which define the interactions between systems.
-         */
-        virtual vector<Flow*> getFlows() const = 0;
 
         /**
          * @brief Gets the current time of the model.
