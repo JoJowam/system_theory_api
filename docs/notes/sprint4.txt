@@ -1,0 +1,3 @@
+Mover os includes para os arquivos cpp - a definição deve ficar perto das implementações
+
+Sumir com os métodos getSystems e getFlows

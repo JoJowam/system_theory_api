@@ -1,0 +1,70 @@
+DLL system32 ou no diretorio da aplicação
+Não tem concorrencia pois é somente leitura
+solução que a industria entende como a melhor forma de resolver um problema
+Method Fabrix ou ABstract Fabric
+Problema e sua solução: pattern
+
+Padrao de projeto method factory
+
+Utilizar o abstract factory
+
+CRia-se com template
+
+Sacrifica-se uma entidade para conhecer todas as implementações
+
+É bom ter apenas uma fabrica centralizada para evitar duplicidade em buscas
+
+Para evitar que o ususario consiga instanciar mais de um elemento no caso de usar model como fabrica, usa-se o pattern:
+
+Singleton
+
+- Garantir que uma classe tenha uma unica instancia e um unico ponto de acesso
+
+- Usar quando é preciso que exista apenas uma instancia de uma classe e quando ela pode ser estendida através de variação 
+
+
+class model{
+    private
+        
+    protected
+        model(){}
+    public 
+        static Model& instance();
+}
+
+Model deve ter a copia proibida pois se não iria estrapolar o conceito de Singleton
+
+_ significa para não mexer na variavel ou metodo, como um aviso
+
+Templatar um patter para evitar o cutAndPaste 
+
+Estudar Template <<------
+
+Erro comum OverENgeniering
+
+Geralmente as classes são Singleton
+
+Unico codigo que eu vou mudar é ModelCriar create e delete
+Criar método escopo global pra criar model
+
+dentro de modelImpl 
+
+CreateFlow
+Cria o objeto
+adiciona elementoe retorna ele'
+
+
+Mexer somente em model e no teste funcional
+
+"Se eu não souber fazer eu delego"
+
+Fabrica deve ser singleton, 
+
+ENtrega
+
+Model encherga impl de system e flow mas os testes unitarios não podem conhecer a implementação de ninguem
+
+Fabrica de sistema, fabrica de flow e fabrica de modelo.
+
+DEstrutor de model deleta system
+Gerar uma DLL por camada ou seja um arquivo DLL pra todos dentro de source -> MyVensym.dll.
