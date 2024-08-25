@@ -59,15 +59,12 @@ double LogisticFlow::equation() const {
 
 //Tests Implementation.
 void exponentialFlow() {
-    System* population1 = new SystemImpl("pop1", 100);
-    System* population2 = new SystemImpl("pop2", 0);
-
-    ExponentialFlow* exponentialFlow = new ExponentialFlow("exponential", population1, population2);
-
     Model* model = new ModelImpl();
-    model->add(population1);
-    model->add(population2);
-    model->add(exponentialFlow);
+
+    System* population1 = model->createSystem("pop1", 100);
+    System* population2 = model->createSystem("pop2", 0);
+
+    ExponentialFlow* exponentialFlow = model->createFlow<ExponentialFlow>("exponential", population1, population2);
 
     model->execute(0, 100, 1);
 
@@ -78,15 +75,12 @@ void exponentialFlow() {
 }
 
 void logisticFlow() {
-    System* p1 = new SystemImpl("p1", 100);
-    System* p2 = new SystemImpl("p2", 10);
-
-    LogisticFlow* logisticFlow = new LogisticFlow("logistic", p1, p2);
-
     Model* model = new ModelImpl();
-    model->add(p1);
-    model->add(p2);
-    model->add(logisticFlow);
+
+    System* p1 = model->createSystem("p1", 100);
+    System* p2 = model->createSystem("p2", 10);
+
+    LogisticFlow* logisticFlow = model->createFlow<LogisticFlow>("logistic", p1, p2);
 
     model->execute(0, 100, 1);
 
@@ -97,31 +91,22 @@ void logisticFlow() {
 }
 
 void complexFlow() {
-    System* q1 = new SystemImpl("Q1", 100);
-    System* q2 = new SystemImpl("Q2", 0);
-    System* q3 = new SystemImpl("Q3", 100);
-    System* q4 = new SystemImpl("Q4", 0);
-    System* q5 = new SystemImpl("Q5", 0);
-
-    ExponentialFlow* f = new ExponentialFlow("f", q1, q2);
-    ExponentialFlow* g = new ExponentialFlow("g", q1, q3);
-    ExponentialFlow* r = new ExponentialFlow("r", q2, q5);
-    ExponentialFlow* t = new ExponentialFlow("t", q2, q3);
-    ExponentialFlow* u = new ExponentialFlow("u", q3, q4);
-    ExponentialFlow* v = new ExponentialFlow("v", q4, q1);
-
     Model* model = new ModelImpl();
-    model->add(q1);
-    model->add(q2);
-    model->add(q3);
-    model->add(q4);
-    model->add(q5);
-    model->add(f);
-    model->add(g);
-    model->add(r);
-    model->add(t);
-    model->add(u);
-    model->add(v);
+    
+    // Criação dos sistemas
+    System* q1 = model->createSystem("Q1", 100);
+    System* q2 = model->createSystem("Q2", 0);
+    System* q3 = model->createSystem("Q3", 100);
+    System* q4 = model->createSystem("Q4", 0);
+    System* q5 = model->createSystem("Q5", 0);
+    
+    // Criação dos fluxos
+    Flow* f = model->createFlow<ExponentialFlow>("f", q1, q2);
+    Flow* g = model->createFlow<ExponentialFlow>("g", q1, q3);
+    Flow* r = model->createFlow<ExponentialFlow>("r", q2, q5);
+    Flow* t = model->createFlow<ExponentialFlow>("t", q2, q3);
+    Flow* u = model->createFlow<ExponentialFlow>("u", q3, q4);
+    Flow* v = model->createFlow<ExponentialFlow>("v", q4, q1);
 
     model->execute(0, 100, 1);
 

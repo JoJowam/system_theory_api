@@ -33,9 +33,6 @@ class ModelImpl : public Model {
         vector<Flow*> flows;         /**< Vector storing pointers to the flows within the model.*/
         int currentTime;             /**< Current time in the simulation.*/
 
-        typedef vector<System*>::iterator SystemIterator;    /**< Typedef for an iterator for the systems vector. */
-        typedef vector<Flow*>::iterator FlowIterator;        /**< Typedef for an iterator for the flows vector. */
-
     public:
 
         /**
@@ -101,6 +98,8 @@ class ModelImpl : public Model {
          * @note The destructor must ensure that any dynamic memory or resources are released to avoid memory leaks.
          */
         virtual ~ModelImpl();
+
+        System* createSystem(const string& name, double value) override;
 
         void add(System* system) override;
         void add(Flow* flow) override;

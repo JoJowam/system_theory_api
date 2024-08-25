@@ -1,4 +1,6 @@
 #include "ModelImpl.hpp"
+#include "SystemImpl.hpp"
+#include "FlowImpl.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -20,7 +22,20 @@ ModelImpl& ModelImpl::operator=(const ModelImpl& other) {
     return *this;
 }
 
-ModelImpl::~ModelImpl() {}
+ModelImpl::~ModelImpl() {
+    for (System* system : systems) {
+        delete system;
+    }
+    for (Flow* flow : flows) {
+        delete flow;
+    }
+}
+
+System* ModelImpl::createSystem(const string& name, double value) {
+    System* system = new SystemImpl(name, value);
+    add(system);
+    return system;
+}
 
 void ModelImpl::add(System* system) {
     systems.push_back(system);

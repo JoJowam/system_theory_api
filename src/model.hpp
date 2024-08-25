@@ -43,6 +43,37 @@ class Model {
         virtual ~Model() {}
 
         /**
+         * @brief Creates a new system within the model.
+         * @details Creates a new system object with the specified name and value, 
+         * and adds it to the model.
+         * @param name The name of the system to be created.
+         * @param value The initial value of the system.
+         * @return A pointer to the newly created system.
+         * 
+         * @note The system is automatically added to the model upon creation.
+         */
+        virtual System* createSystem(const string& name, double value) = 0;
+        
+        /**
+         * @brief Creates a new flow within the model.
+         * @details Creates a new flow object of the specified type, with the given name, source, and destination systems.
+         * @tparam T The type of flow to be created.
+         * @param name The name of the flow to be created.
+         * @param source Pointer to the source system of the flow.
+         * @param destination Pointer to the destination system of the flow.
+         * @return A pointer to the newly created flow.
+         * 
+         * @note The flow is automatically added to the model upon creation.
+         */
+        template <typename T>
+        T* createFlow(const string& name, System* source, System* destination) {
+            static_assert(std::is_base_of<Flow, T>::value, "T must be derived from Flow");
+            T* flow = new T(name, source, destination);
+            add(flow);
+            return flow;
+        }
+
+        /**
          * @brief Adds a system to the model.
          * @details Adds a system to the model by storing a pointer to the system in the systems vector.
          * @param system Pointer to the system to be added.
