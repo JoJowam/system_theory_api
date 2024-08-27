@@ -33,8 +33,6 @@ class ModelImpl : public Model {
         vector<Flow*> flows;         /**< Vector storing pointers to the flows within the model.*/
         int currentTime;             /**< Current time in the simulation.*/
 
-    public:
-
         /**
          * @brief Default constructor for the ModelImpl class.
          * @details Initializes a ModelImpl object with no systems or flows.
@@ -74,7 +72,7 @@ class ModelImpl : public Model {
          * @endcode
          */
         ModelImpl(const ModelImpl& other);
-
+        
         /**
          * @brief Assignment operator for the ModelImpl class.
          * @details Assigns one ModelImpl object to another, ensuring proper handling of dynamic memory and object state.
@@ -91,6 +89,13 @@ class ModelImpl : public Model {
          */
         ModelImpl& operator=(const ModelImpl& other);
 
+        void add(System* system) override;
+        void add(Flow* flow) override;
+
+        static ModelImpl* _instance; /**< Static instance of the ModelImpl class.*/
+ 
+    public:
+
         /**
          * @brief Destructor for the ModelImpl class.
          * @details Ensures that resources allocated by the ModelImpl instance are properly cleaned up.
@@ -99,10 +104,26 @@ class ModelImpl : public Model {
          */
         virtual ~ModelImpl();
 
-        System* createSystem(const string& name, double value) override;
+        /**
+         * @brief Retrieves the singleton instance of the ModelImpl class.
+         * @return A pointer to the singleton instance of the ModelImpl class.
+         * 
+         * @note The getInstance method provides access to the singleton instance of the ModelImpl class.
+         */
+        static ModelImpl* getInstance(const string& name);
+        
+        /**
+         * @brief Deletes the singleton instance of the ModelImpl class.
+         * @return None.
+         * 
+         * @note The deleteInstance method is used to clean up the singleton instance of the ModelImpl class.
+         */
+        static bool deleteInstance();
 
-        void add(System* system) override;
-        void add(Flow* flow) override;
+        System* createSystem(const string& name, double value) override;
+        
+        bool deleteSystem(System* system) override;
+        bool deleteFlow(Flow* flow) override;
 
         void setName(const string& modelName) override;
         string getName() const override;

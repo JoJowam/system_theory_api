@@ -2,8 +2,8 @@
 #define FUNCIONAL_TESTS_HPP
 
 #include "../../src/FlowImpl.hpp"
-#include "../../src/ModelImpl.hpp"
-#include "../../src/SystemImpl.hpp"
+#include "../../src/Model.hpp"
+#include "../../src/System.hpp"
 
 /**
  * @class ExponentialFlow
@@ -24,15 +24,6 @@
  */
 class ExponentialFlow : public FlowImpl {
     public:
-        /**
-         * @brief Default constructor for ExponentialFlow.
-         * @details Initializes an ExponentialFlow with no name and no connected systems.
-         * 
-         * @code
-         * ExponentialFlow flow;
-         * @endcode
-         */
-        ExponentialFlow();
 
         /**
          * @brief Constructs an ExponentialFlow with a name and optionally connects it to systems.
@@ -51,40 +42,8 @@ class ExponentialFlow : public FlowImpl {
          * ExponentialFlow flow("My Flow", source, destination);
          * @endcode
          */
-        ExponentialFlow(const std::string& name, System* source = nullptr, System* destination = nullptr);
-
-        /**
-         * @brief Copy constructor for ExponentialFlow.
-         * @param other The ExponentialFlow object to be copied.
-         * 
-         * @note The copy constructor ensures that a shallow copy of the ExponentialFlow object is made.
-         * 
-         * @code
-         * ExponentialFlow originalFlow("Original Flow");
-         * ExponentialFlow copiedFlow = originalFlow;
-         * @endcode
-         */
-        ExponentialFlow(const ExponentialFlow& other);
-
-        /**
-         * @brief Assignment operator for ExponentialFlow.
-         * @param other The ExponentialFlow object to be assigned.
-         * @return A reference to this ExponentialFlow instance.
-         * 
-         * @code
-         * ExponentialFlow originalFlow("Original Flow");
-         * ExponentialFlow copiedFlow;
-         * copiedFlow = originalFlow;
-         * @endcode
-         */
-        ExponentialFlow& operator=(const ExponentialFlow& other);
-
-        /**
-         * @brief Destructor for ExponentialFlow.
-         * @details Destroys the ExponentialFlow object and frees associated resources.
-         */
-        virtual ~ExponentialFlow();
-
+        ExponentialFlow(const std::string& name, System* source = nullptr, System* destination = nullptr)
+            : FlowImpl(name, source, destination) {}
         /**
          * @brief Implements the equation method.
          * @details Calculates the flow value based on an exponential equation.
@@ -113,18 +72,6 @@ class ExponentialFlow : public FlowImpl {
  */
 class LogisticFlow : public FlowImpl {
     public:
-        /**
-         * @brief Default constructor for LogisticFlow.
-         * @details Initializes a LogisticFlow with no name and no connected systems.
-         * 
-         * @note The source and destination systems can be connected after flow creation. The default
-         *  values for the source and destination systems are nullptr and the name is an empty string ''.
-         * 
-         * @code
-         * LogisticFlow flow;
-         * @endcode
-         */
-        LogisticFlow();
 
         /**
          * @brief Constructs a LogisticFlow with a name and optionally connects it to systems.
@@ -140,40 +87,8 @@ class LogisticFlow : public FlowImpl {
          * LogisticFlow flow("My Flow", source, destination);
          * @endcode
          */
-        LogisticFlow(const std::string& name, System* source = nullptr, System* destination = nullptr);
-
-        /**
-         * @brief Copy constructor for LogisticFlow.
-         * @param other The LogisticFlow object to be copied.
-         * 
-         * @note The copy constructor ensures that a shallow copy of the LogisticFlow object is made.
-         * 
-         * @code
-         * LogisticFlow originalFlow("Original Flow");
-         * LogisticFlow copiedFlow = originalFlow;
-         * @endcode
-         */
-        LogisticFlow(const LogisticFlow& other);
-
-        /**
-         * @brief Assignment operator for LogisticFlow.
-         * @param other The LogisticFlow object to be assigned.
-         * @return A reference to this LogisticFlow instance.
-         * 
-         * @code
-         * LogisticFlow originalFlow("Original Flow");
-         * LogisticFlow copiedFlow;
-         * copiedFlow = originalFlow;
-         * @endcode
-         */
-        LogisticFlow& operator=(const LogisticFlow& other);
-
-        /**
-         * @brief Destructor for LogisticFlow.
-         * @details Destroys the LogisticFlow object and frees associated resources.
-         */
-        virtual ~LogisticFlow();
-
+        LogisticFlow(const std::string& name, System* source = nullptr, System* destination = nullptr)
+                : FlowImpl(name, source, destination) {}
         /**
          * @brief Implements the equation method.
          * @details Calculates the flow value based on a logistic equation.

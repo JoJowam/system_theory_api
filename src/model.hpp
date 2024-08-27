@@ -33,6 +33,10 @@ class Flow;
  */
 class Model {
     public:
+
+        typedef vector<System*>::iterator SystemIterator;    /**< Typedef for an iterator for the systems vector. */
+        typedef vector<Flow*>::iterator FlowIterator;        /**< Typedef for an iterator for the flows vector. */
+        
         /**
          * @brief Virtual destructor for the Model class.
          * @details Ensures derived classes are properly destroyed.
@@ -41,6 +45,32 @@ class Model {
          * @note The destructor is virtual to allow for proper cleanup of derived class resources.
          */
         virtual ~Model() {}
+
+        /**
+         * @brief Retrieves the singleton instance of the Model class.
+         * @return A pointer to the singleton instance of the Model class.
+         * 
+         * @note The getInstance method provides access to the singleton instance of the Model class.
+         */
+        static Model* getInstance();
+
+        /**
+         * @brief Creates a new model object.
+         * @details Creates a new model object with the specified name.
+         * @param name The name of the model to be created.
+         * @return A pointer to the newly created model.
+         * 
+         * @note The model is created with the given name and can be used to define and execute a simulation.
+         */
+        static Model* createModel(const string& name);
+
+        /**
+         * @brief Deletes the model object.
+         * @return A pointer to the deleted model object.
+         * 
+         * @note The deleteModel method is used to destroy the singleton instance of the Model class.
+         */
+        static bool deleteModel();
 
         /**
          * @brief Creates a new system within the model.
@@ -53,7 +83,16 @@ class Model {
          * @note The system is automatically added to the model upon creation.
          */
         virtual System* createSystem(const string& name, double value) = 0;
-        
+
+        /**
+         * @brief Deletes a system from the model.
+         * @param name The name of the system to be deleted.
+         * @return True if the system was successfully deleted, false otherwise.
+         * 
+         * @note The system is removed from the model's collection of systems.
+         */
+        virtual bool deleteSystem(System* system) = 0;
+
         /**
          * @brief Creates a new flow within the model.
          * @details Creates a new flow object of the specified type, with the given name, source, and destination systems.
@@ -66,7 +105,7 @@ class Model {
          * @note The flow is automatically added to the model upon creation.
          */
         template <typename T>
-        T* createFlow(const string& name, System* source, System* destination) {
+        T* createFlow(const string& name, System* source = nullptr, System* destination = nullptr) {
             static_assert(std::is_base_of<Flow, T>::value, "T must be derived from Flow");
             T* flow = new T(name, source, destination);
             add(flow);
@@ -74,24 +113,13 @@ class Model {
         }
 
         /**
-         * @brief Adds a system to the model.
-         * @details Adds a system to the model by storing a pointer to the system in the systems vector.
-         * @param system Pointer to the system to be added.
-         * @return None.
+         * @brief Deletes a flow from the model.
+         * @param name The name of the flow to be deleted.
+         * @return True if the flow was successfully deleted, false otherwise.
          * 
-         * @note The system must be correctly initialized before adding it to the model to ensure proper simulation behavior.
+         * @note The flow is removed from the model's collection of flows.
          */
-        virtual void add(System* system) = 0;
-
-        /**
-         * @brief Adds a flow to the model.
-         * @details Adds a flow to the model by storing a pointer to the flow in the flows vector.
-         * @param flow Pointer to the Flow object to be added.
-         * @return None.
-         * 
-         * @note The flow must be properly configured, with source and destination systems set, before adding it to the model.
-         */
-        virtual void add(Flow* flow) = 0;
+        virtual bool deleteFlow(Flow* flow) = 0;
 
         /**
          * @brief Sets the name of the model.
@@ -139,6 +167,25 @@ class Model {
          * @warning Ensure that the time range and time step are set correctly to avoid simulation errors.
          */
         virtual void execute(int startTime, int endTime, int timeStep) = 0;
+
+    protected:
+        /**
+         * @brief Adds a system to the model.
+         * @param system The system to be added to the model.
+         * @return None.
+         * 
+         * @note The system is added to the model's collection of systems for simulation.
+         */
+        virtual void add(System* system) = 0;
+
+        /**
+         * @brief Adds a flow to the model.
+         * @param flow The flow to be added to the model.
+         * @return None.
+         * 
+         * @note The flow is added to the model's collection of flows for simulation.
+         */
+        virtual void add(Flow* flow) = 0;
 };
 
 #endif
