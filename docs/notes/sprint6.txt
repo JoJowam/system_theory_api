@@ -1,0 +1,23 @@
+idioma é um pattern que só serve para uma linguagem;
+padrão que só existe pra c++ = handle/body;
+EVoluir a implementação de dois eixos ortogonais de forma independente;
+TODO:1. Enviar dlls para a pasta bin/lib
+
+Poll de objetos:
+QUnado dou um delet jogo numa lista na esperança de pegar o objeto novamente
+
+COuntedObjetct:
+Pattern que conta o numero de objetos de uma classe;
+
+Vou fazer um bridge que mapeia uma api na outra;
+
+Body: implementação de um objeto contado
+- Cópia proíbida
+
+Handle: Tem o tipo T e ao ser criado ele mesmo instancia o body e faz o attach marcando 1
+- QUando o handle morre, ele somente faz o datch
+- POde copiar o handle, contrutor de copia permitido
+- Operador = attach para quem vai apontar, detach de quem estava apontando e iguala ponteiros.
+
+Como implementar meu sustema:
+- SystemImpl vira SystemBody (somente o nome da classe
