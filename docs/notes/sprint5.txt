@@ -62,3 +62,6 @@ Fabrica de sistema, fabrica de flow e fabrica de modelo.
 
 Dstrutor de model deleta system
 Gerar uma DLL por camada ou seja um arquivo DLL pra todos dentro de source -> MyVensym.dll.
+Nao gerar uma dll pra cada cpp dentro de source, juntar todos os cpps de sorce dentro de uma unica dll chamada myVensym
+
+Nao é necessario fazer dll para os testes unitarios e funcionais
