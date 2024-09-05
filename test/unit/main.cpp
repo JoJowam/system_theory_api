@@ -1,15 +1,14 @@
-#include "UnitFlow.hpp"
-#include "UnitModel.hpp"
-#include "UnitSystem.hpp"
+#include "UnitBridge.hpp"
+
 
 int main() {
-    UnitFlow unitFlow;
-    UnitModel unitModel;
-    UnitSystem unitSystem;
 
-    unitFlow.runUnitTests();
-    unitModel.runUnitTests();
-    unitSystem.runUnitTests();
+    UnitBridge unitBridge;
+
+    unitBridge.runUnitTests();
+    // unitFlow.runUnitTests();
+    // unitModel.runUnitTests();
+    // unitSystem.runUnitTests();
 
     return 0;
 }

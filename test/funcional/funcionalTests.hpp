@@ -4,6 +4,7 @@
 #include "../../src/FlowImpl.hpp"
 #include "../../src/Model.hpp"
 #include "../../src/System.hpp"
+#include "../../src/Bridge.hpp"
 
 /**
  * @class ExponentialFlow
@@ -22,9 +23,8 @@
  * @date 2024-08-19
  * @version 0.1.0
  */
-class ExponentialFlow : public FlowImpl {
+class ExponentialFlow : public FlowHandle  {
     public:
-
         /**
          * @brief Constructs an ExponentialFlow with a name and optionally connects it to systems.
          * @param name The name of the flow.
@@ -42,8 +42,8 @@ class ExponentialFlow : public FlowImpl {
          * ExponentialFlow flow("My Flow", source, destination);
          * @endcode
          */
-        ExponentialFlow(const std::string& name, System* source = nullptr, System* destination = nullptr)
-            : FlowImpl(name, source, destination) {}
+        ExponentialFlow(const std::string& name = "", System* source = nullptr, System* destination = nullptr)
+            : FlowHandle(name, source, destination) {}
         /**
          * @brief Implements the equation method.
          * @details Calculates the flow value based on an exponential equation.
@@ -52,7 +52,12 @@ class ExponentialFlow : public FlowImpl {
          * 
          * @note The flow value is directly proportional to the source system's value.
          */
-        double equation() const override;
+        double equation() const override {
+            if (this->getSource()) {
+                return 0.01 * this->getSource()->getValue(); // Exponential equation implementation
+            }
+            return 0.0;
+        }
 };
 
 /**
@@ -70,9 +75,8 @@ class ExponentialFlow : public FlowImpl {
  * @date 2024-08-19
  * @version 0.1.0
  */
-class LogisticFlow : public FlowImpl {
+class LogisticFlow : public FlowHandle {
     public:
-
         /**
          * @brief Constructs a LogisticFlow with a name and optionally connects it to systems.
          * @param name The name of the flow.
@@ -88,14 +92,19 @@ class LogisticFlow : public FlowImpl {
          * @endcode
          */
         LogisticFlow(const std::string& name, System* source = nullptr, System* destination = nullptr)
-                : FlowImpl(name, source, destination) {}
+                : FlowHandle(name, source, destination) {}
         /**
          * @brief Implements the equation method.
          * @details Calculates the flow value based on a logistic equation.
          * @return The calculated flow value based on the equation:
          * \f[ f = 0.01 \times destination->getValue() \times \left(1 - \frac{destination->getValue()}{70}\right) \f]
          */
-        double equation() const override;
+        double equation() const override {
+            if (this->getSource()) {
+                return 0.01 * this->getDestination()->getValue() * (1 - this->getDestination()->getValue() / 70); // Logistic equation implementation
+            }
+            return 0.0;
+        };
 };
 
 /**

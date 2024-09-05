@@ -3,6 +3,7 @@
 
 #include "Model.hpp"
 #include "System.hpp"
+#include "Bridge.hpp"
 #include "Flow.hpp"
 
 using std::vector;
@@ -11,21 +12,21 @@ using std::string;
 using namespace std;
 
 /**
- * @class ModelImpl
- * @brief Concrete implementation of the Model interface.
- * @details ModelImpl provides a concrete implementation of the Model interface, managing the interactions 
- * between systems and flows within a simulation. It tracks the current time of the simulation and allows 
- * for the execution of the model over a specified time range.
+ * @class ModelBody
+ * @brief Implementation class for managing the internal state of the model.
+ * @details ModelBody encapsulates the core functionality and data of the model. It manages systems and flows,
+ *          tracks the simulation time, and performs the simulation execution. This class is intended to be 
+ *          used internally by the ModelHandle and is not exposed directly to the user.
  * 
- * @see System 
+ * @see ModelHandle
+ * @see System
  * @see Flow
- * @see Model
- * @warning Ensure all systems and flows are properly configured before executing the model.
- * @date 2024-08-18
- * @version 0.0.1
+ * @see Body
+ * @warning Ensure that the ModelBody is properly managed by its associated Handle to avoid inconsistencies
+ *          and ensure proper lifecycle management.
  */
-class ModelImpl : public Model {
-    friend class UnitModel;          /**< Friend class for unit testing. */
+class ModelBody : public Body {
+    friend class UnitModel;
 
     private:
         string name;                 /**< Name of the model.*/
@@ -33,105 +34,87 @@ class ModelImpl : public Model {
         vector<Flow*> flows;         /**< Vector storing pointers to the flows within the model.*/
         int currentTime;             /**< Current time in the simulation.*/
 
-        /**
-         * @brief Default constructor for the ModelImpl class.
-         * @details Initializes a ModelImpl object with no systems or flows.
-         * 
-         * @note This constructor allows for the creation of a ModelImpl instance that can be configured later.
-         * 
-         * @code
-         * Model* model = new ModelImpl();
-         * model->setName("Example Model");
-         * @endcode
-         */
-        ModelImpl();
-
-        /**
-         * @brief Constructs a ModelImpl with a specified name.
-         * @details Initializes the model with the given name and no systems or flows.
-         * @param name The name of the model.
-         * 
-         * @note The name helps in identifying the model within a larger simulation framework.
-         * 
-         * @code
-         * Model* model = new ModelImpl("Example Model");
-         * @endcode
-         */
-        ModelImpl(const string& name);
-
-        /**
-         * @brief Copy constructor for the ModelImpl class.
-         * @details Initializes a ModelImpl object as a copy of another ModelImpl object, duplicating its systems and flows.
-         * @param other ModelImpl object to copy.
-         * 
-         * @note The copy constructor ensures that a shallow copy of the ModelImpl object is made.
-         * 
-         * @code
-         * Model* originalModel = new ModelImpl("Original Model");
-         * Model* copiedModel = new ModelImpl(*originalModel);
-         * @endcode
-         */
-        ModelImpl(const ModelImpl& other);
+    public:
         
-        /**
-         * @brief Assignment operator for the ModelImpl class.
-         * @details Assigns one ModelImpl object to another, ensuring proper handling of dynamic memory and object state.
-         * @param other Another instance of ModelImpl to be assigned.
-         * @return A reference to this ModelImpl instance.
-         * 
-         * @note The assignment operator should handle self-assignment and ensure that all resources are properly managed.
-         * 
-         * @code
-         * Model* model1 = new ModelImpl("Model 1");
-         * Model* model2 = new ModelImpl("Model 2");
-         * model2 = model1;
-         * @endcode
-         */
-        ModelImpl& operator=(const ModelImpl& other);
+        virtual ~ModelBody(){};
+        void add(System* system);
+        void add(Flow* flow);
 
-        void add(System* system) override;
-        void add(Flow* flow) override;
+        void setName(const string& modelName);
+        string getName() const;
 
-        static ModelImpl* _instance; /**< Static instance of the ModelImpl class.*/
- 
+        int getCurrentTime() const;
+        void setCurrentTime(int time);
+
+        void execute(int startTime, int endTime, int timeStep);
+
+        System* createSystem(const string& name, double value);;   
+        bool deleteSystem(System* system);
+        bool deleteFlow(Flow* flow);  
+};
+
+/**
+ * @class ModelHandle
+ * @brief Handle class for managing access to the ModelBody instance.
+ * @details ModelHandle acts as a wrapper for the ModelBody, implementing the Handle pattern. It provides
+ *          the interface through which users interact with the model, delegating all operations to the
+ *          underlying ModelBody instance. This class ensures that the ModelBody is properly managed and
+ *          adheres to the singleton pattern.
+ * 
+ * @see ModelBody
+ * @see Handle
+ */
+class ModelHandle : public Model, public Handle<ModelBody> {
+
     public:
 
+        static Model* _instance; /**< Static pointer to the singleton instance of ModelHandle. */
+        
         /**
-         * @brief Destructor for the ModelImpl class.
-         * @details Ensures that resources allocated by the ModelImpl instance are properly cleaned up.
+         * @brief Constructor for ModelHandle.
+         * @param name Optional name to initialize the model.
+         * 
+         * @note This constructor creates a ModelHandle instance and sets the name of the underlying ModelBody.
+         */
+        ModelHandle(const string& name = "") : Handle<ModelBody>() {
+            pImpl_->setName(name);
+        }
+
+        /**
+         * @brief Destructor for the ModelHandle class.
+         * @details Ensures that resources allocated by the ModelHandle instance are properly cleaned up.
          * 
          * @note The destructor must ensure that any dynamic memory or resources are released to avoid memory leaks.
          */
-        virtual ~ModelImpl();
-
-        /**
-         * @brief Retrieves the singleton instance of the ModelImpl class.
-         * @return A pointer to the singleton instance of the ModelImpl class.
-         * 
-         * @note The getInstance method provides access to the singleton instance of the ModelImpl class.
-         */
-        static ModelImpl* getInstance(const string& name);
+        virtual ~ModelHandle() {
+            if (_instance == this) {
+                _instance = nullptr;
+            }
+        }
         
-        /**
-         * @brief Deletes the singleton instance of the ModelImpl class.
-         * @return None.
-         * 
-         * @note The deleteInstance method is used to clean up the singleton instance of the ModelImpl class.
-         */
-        static bool deleteInstance();
+        void add(System* system) { pImpl_->add(system); }
 
-        System* createSystem(const string& name, double value) override;
-        
-        bool deleteSystem(System* system) override;
-        bool deleteFlow(Flow* flow) override;
+        void add(Flow* flow) { pImpl_->add(flow); }
 
-        void setName(const string& modelName) override;
-        string getName() const override;
+        System* createSystem(const string& name, double value) {
+            return pImpl_->createSystem(name, value);
+        }
 
-        int getCurrentTime() const override;
-        void setCurrentTime(int time) override;
+        bool deleteSystem(System* system) { return pImpl_->deleteSystem(system); }
 
-        void execute(int startTime, int endTime, int timeStep) override;
+        bool deleteFlow(Flow* flow) { return pImpl_->deleteFlow(flow); }
+
+        void setName(const string& name) { pImpl_->setName(name); }
+
+        string getName() const { return pImpl_->getName(); }
+
+        int getCurrentTime() const { return pImpl_->getCurrentTime(); }
+
+        void setCurrentTime(int time) { pImpl_->setCurrentTime(time); }
+
+        void execute(int startTime, int endTime, int timeStep) {
+            pImpl_->execute(startTime, endTime, timeStep);
+        }
 };
 
 #endif

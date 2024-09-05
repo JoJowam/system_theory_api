@@ -11,7 +11,7 @@ void UnitSystem::runUnitTests() {
 }
 
 bool UnitSystem::unit_testGetName() {
-    System* system = new SystemImpl("TestGetName_System");
+    System* system = new SystemHandle("TestGetName_System");
     assert(system->getName() == "TestGetName_System");
 
     delete system;
@@ -22,7 +22,7 @@ bool UnitSystem::unit_testGetName() {
 }
 
 bool UnitSystem::unit_testGetValue() {
-    System* system = new SystemImpl("TestGetValue_System", 100.0);
+    System* system = new SystemHandle("TestGetValue_System", 100.0);
     assert(system->getValue() == 100.0);
 
     delete system;
@@ -33,7 +33,7 @@ bool UnitSystem::unit_testGetValue() {
 }
 
 bool UnitSystem::unit_testSetValue() {
-    System* system = new SystemImpl("TestSetValue_System");
+    System* system = new SystemHandle("TestSetValue_System");
     system->setValue(200.0);
     assert(system->getValue() == 200.0);
 

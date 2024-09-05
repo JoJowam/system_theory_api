@@ -5,22 +5,6 @@
 #include <string>
 #include <cmath>
 
-//ExponentialFlow equation Implementation.
-double ExponentialFlow::equation() const {
-    if (source != nullptr) {
-        return 0.01 * source->getValue();
-    }
-    return 0.0;
-}
-
-//LogisticFlow equation Implementation.
-double LogisticFlow::equation() const {
-    if (source != nullptr) {
-        return 0.01 * destination->getValue() * (1 - destination->getValue() / 70);
-    }
-    return 0.0;
-}
-
 //Tests Implementation.
 void exponentialFlow() {
     Model* model = Model::createModel("Exponential Flow");
@@ -28,7 +12,7 @@ void exponentialFlow() {
     System* population1 = model->createSystem("pop1", 100);
     System* population2 = model->createSystem("pop2", 0);
 
-    ExponentialFlow* exponentialFlow = model->createFlow<ExponentialFlow>("exponential", population1, population2);
+    Flow* exponentialFlow = model->createFlow<ExponentialFlow>("exponential", population1, population2);
 
     model->execute(0, 100, 1);
 
@@ -46,7 +30,7 @@ void logisticFlow() {
     System* p1 = model->createSystem("p1", 100);
     System* p2 = model->createSystem("p2", 10);
 
-    LogisticFlow* logisticFlow = model->createFlow<LogisticFlow>("logistic", p1, p2);
+    Flow* logisticFlow = model->createFlow<LogisticFlow>("logistic", p1, p2);
 
     model->execute(0, 100, 1);
 

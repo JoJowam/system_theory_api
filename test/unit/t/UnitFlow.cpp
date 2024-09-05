@@ -18,7 +18,7 @@
  * Flow-related functionality in various scenarios. This class allows for the easy verification 
  * of how other parts of the system interact with Flow objects, without the complexity of real flow calculations.
  */
-class UnitTestFlowStub : public FlowImpl {
+class UnitTestFlowStub : public FlowHandle {
     public:
         /**
          * @brief Constructs a UnitTestFlowStub  object.
@@ -27,7 +27,7 @@ class UnitTestFlowStub : public FlowImpl {
          * @param destination Pointer to the destination System (default is nullptr).
          */
         UnitTestFlowStub (const std::string& name = "", System* source = nullptr, System* destination = nullptr)
-            : FlowImpl(name, source, destination) {}
+            : FlowHandle(name, source, destination) {}
 
         /**
          * @brief Provides a constant value for the flow equation.
@@ -49,6 +49,7 @@ void UnitFlow::runUnitTests() {
 }
 
 bool UnitFlow::unit_testGetName() {
+
     Flow* flow = new UnitTestFlowStub ("TestGetName_Flow");
     assert(flow->getName() == "TestGetName_Flow");
 

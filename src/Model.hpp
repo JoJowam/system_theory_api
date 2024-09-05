@@ -104,10 +104,9 @@ class Model {
          * 
          * @note The flow is automatically added to the model upon creation.
          */
-        template <typename T>
-        T* createFlow(const string& name, System* source = nullptr, System* destination = nullptr) {
-            static_assert(std::is_base_of<Flow, T>::value, "T must be derived from Flow");
-            T* flow = new T(name, source, destination);
+        template <typename FLOW_TEMPLATE>
+        Flow* createFlow(const string& name, System* source = nullptr, System* destination = nullptr) {
+            Flow* flow = new FLOW_TEMPLATE(name, source, destination);
             add(flow);
             return flow;
         }

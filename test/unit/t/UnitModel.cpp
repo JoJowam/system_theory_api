@@ -26,7 +26,7 @@ using std::string;
  * with Flow objects. The constant return value of 1.0 from the `equation` method allows testers to 
  * assess interactions and functionality within a controlled test environment.
  */
-class UnitTestModelStub : public FlowImpl {
+class UnitTestModelStub : public FlowHandle {
     public:
         /**
          * @brief Constructs a UnitTestModelStub object.
@@ -35,7 +35,7 @@ class UnitTestModelStub : public FlowImpl {
          * @param destination Pointer to the destination System (default is nullptr).
          */
         UnitTestModelStub(const std::string& name = "", System* source = nullptr, System* destination = nullptr)
-            : FlowImpl(name, source, destination) {}
+            : FlowHandle(name, source, destination) {}
 
         /**
          * @brief Provides a constant value for the flow equation.
@@ -59,7 +59,7 @@ void UnitModel::runUnitTests() {
 }
 
 bool UnitModel::unit_testGetName() {
-    Model* model = new ModelImpl("TestGetName_Model");
+    Model* model = new ModelHandle("TestGetName_Model");
     assert(model->getName() == "TestGetName_Model");
 
     delete model;
@@ -70,7 +70,7 @@ bool UnitModel::unit_testGetName() {
 }
 
 bool UnitModel::unit_testSetName() {
-    Model* model = new ModelImpl();
+    Model* model = new ModelHandle();
     string modelName = "TestSetName_Model";
     model->setName(modelName);
     assert(model->getName() == modelName);
@@ -83,11 +83,11 @@ bool UnitModel::unit_testSetName() {
 }
 
 bool UnitModel::unit_testAddSystem() {
-    ModelImpl* model = new ModelImpl("TestAddSystem_Model");
-    System* system = new SystemImpl("TestAddSystem_System", 100.0);
+    ModelHandle* model = new ModelHandle("TestAddSystem_Model");
+    System* system = new SystemHandle("TestAddSystem_System", 100.0);
     model->add(system);
 
-    ModelImpl::SystemIterator iterator = std::find(model->systems.begin(), model->systems.end(), system);
+    Model::SystemIterator iterator = std::find(model->systems.begin(), model->systems.end(), system);
     assert(iterator != model->systems.end());
 
     delete model;

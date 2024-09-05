@@ -5,132 +5,103 @@
 #include <algorithm>
 #include <iostream>
 
-ModelImpl* ModelImpl::_instance = nullptr;
+Model* ModelHandle::_instance = nullptr;
 
-ModelImpl::ModelImpl() : name(""), currentTime(0) {}
-
-ModelImpl::ModelImpl(const string& name) : name(name), currentTime(0) {}
-
-ModelImpl::ModelImpl(const ModelImpl& other) 
-    : name(other.name), systems(other.systems), flows(other.flows), currentTime(other.currentTime) {}
-
-ModelImpl& ModelImpl::operator=(const ModelImpl& other) {
-    if (this != &other) {
-        name = other.name;
-        systems = other.systems;
-        flows = other.flows;
-        currentTime = other.currentTime;
+Model* Model::getInstance() {
+    if (ModelHandle::_instance == nullptr) {
+        ModelHandle::_instance = new ModelHandle();
     }
-    return *this;
+    return ModelHandle::_instance;
 }
 
-ModelImpl::~ModelImpl() {
-    for (System* system : systems) {
-        delete system;
-    }
-    for (Flow* flow : flows) {
-        delete flow;
-    }
+Model* Model::createModel(const string& name) {
+    return getInstance();
 }
 
-ModelImpl* ModelImpl::getInstance(const string& name) {
-    if (_instance == nullptr) {
-        _instance = new ModelImpl(name);
-    }
-    return _instance;
-}
-
-bool ModelImpl::deleteInstance() {
-    if (_instance) {
-        delete _instance;
-        _instance = nullptr;
-        return true; 
+bool Model::deleteModel() {
+    if (ModelHandle::_instance != nullptr) {
+        delete ModelHandle::_instance;
+        ModelHandle::_instance = nullptr;
+        return true;
     }
     return false;
 }
 
-Model* Model::createModel(const string& name) {
-    return ModelImpl::getInstance(name);
+void ModelBody::add(System* system) {
+    systems.push_back(system);
 }
 
-bool Model::deleteModel() {
-    return ModelImpl::deleteInstance();
+void ModelBody::add(Flow* flow) {
+    flows.push_back(flow);
 }
 
-System* ModelImpl::createSystem(const string& name, double value) {
-    System* system = new SystemImpl(name, value);
+System* ModelBody::createSystem(const string& name, double value) {
+    System* system = new SystemHandle(name, value);
     add(system);
     return system;
 }
 
-bool ModelImpl::deleteSystem(System* system) {
-    SystemIterator iterator = std::find(systems.begin(), systems.end(), system);
-    if (iterator != systems.end()) {
-        systems.erase(iterator);
+bool ModelBody::deleteSystem(System* system) {
+    auto it = std::find(systems.begin(), systems.end(), system);
+    if (it != systems.end()) {
+        systems.erase(it);
         delete system;
         return true;
     }
     return false;
 }
 
-bool ModelImpl::deleteFlow(Flow* flow) {
-    FlowIterator iterator = std::find(flows.begin(), flows.end(), flow);
-    if (iterator != flows.end()) {
-        flows.erase(iterator);
+bool ModelBody::deleteFlow(Flow* flow) {
+    auto it = std::find(flows.begin(), flows.end(), flow);
+    if (it != flows.end()) {
+        flows.erase(it);
         delete flow;
         return true;
     }
     return false;
 }
 
-void ModelImpl::add(System* system) {
-    systems.push_back(system);
+// Métodos de acesso
+void ModelBody::setName(const string& modelName) {
+    name = modelName;
 }
 
-void ModelImpl::add(Flow* flow) {
-    flows.push_back(flow);
-}
-
-void ModelImpl::setName(const string& name) {
-    this->name = name;
-}
-
-string ModelImpl::getName() const {
+string ModelBody::getName() const {
     return name;
 }
 
-int ModelImpl::getCurrentTime() const {
+int ModelBody::getCurrentTime() const {
     return currentTime;
 }
 
-void ModelImpl::setCurrentTime(int time) {
+void ModelBody::setCurrentTime(int time) {
     currentTime = time;
 }
 
-void ModelImpl::execute(int startTime, int endTime, int timeStep){
+void ModelBody::execute(int startTime, int endTime, int timeStep) {
     setCurrentTime(startTime);
-    for (int currentTime = startTime + timeStep; currentTime <= endTime; currentTime += timeStep){
+    for (int currentTime = startTime + timeStep; currentTime <= endTime; currentTime += timeStep) {
         vector<double> systemValueChanges(systems.size(), 0.0);
 
-        for (Flow *currentFlow : flows){
-            if (currentFlow->getSource() && currentFlow->getDestination()){
+        for (Flow* currentFlow : flows) {
+            if (currentFlow->getSource() && currentFlow->getDestination()) {
                 double flowValue = currentFlow->equation();
 
-                SystemIterator sourceSystemIterator = find(systems.begin(), systems.end(), currentFlow->getSource());
-                SystemIterator destinationSystemIterator = find(systems.begin(), systems.end(), currentFlow->getDestination());
+                auto sourceIt = std::find(systems.begin(), systems.end(), currentFlow->getSource());
+                auto destinationIt = std::find(systems.begin(), systems.end(), currentFlow->getDestination());
 
-                int sourceSystemIndex = distance(systems.begin(), sourceSystemIterator);
-                int destinationSystemIndex = distance(systems.begin(), destinationSystemIterator);
+                int sourceIndex = std::distance(systems.begin(), sourceIt);
+                int destinationIndex = std::distance(systems.begin(), destinationIt);
 
-                systemValueChanges[sourceSystemIndex] -= flowValue;
-                systemValueChanges[destinationSystemIndex] += flowValue;
+                systemValueChanges[sourceIndex] -= flowValue;
+                systemValueChanges[destinationIndex] += flowValue;
             }
         }
 
-        SystemIterator systemIt = systems.begin();
+        auto systemIt = systems.begin();
         auto valueChangeIt = systemValueChanges.begin();
 
-        while (systemIt != systems.end() && valueChangeIt != systemValueChanges.end()){
+        while (systemIt != systems.end() && valueChangeIt != systemValueChanges.end()) {
             (*systemIt)->setValue((*systemIt)->getValue() + *valueChangeIt);
             ++systemIt;
             ++valueChangeIt;

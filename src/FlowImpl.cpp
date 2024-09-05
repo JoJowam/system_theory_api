@@ -1,41 +1,25 @@
 #include "FlowImpl.hpp"
 
-FlowImpl::FlowImpl() 
-    : name(""), source(nullptr), destination(nullptr) {}
-
-FlowImpl::FlowImpl(const string& name, System* source, System* destination) 
-    : name(name), source(source), destination(destination) {}
-
-FlowImpl::FlowImpl(const FlowImpl& other) 
-    : name(other.name), source(other.source), destination(other.destination) {}
-
-FlowImpl& FlowImpl::operator=(const FlowImpl& other) {
-    if (this != &other) {
-        name = other.name;
-        source = other.source;
-        destination = other.destination;
-    }
-    return *this;
-}
-
-FlowImpl::~FlowImpl() {}
-
-const string& FlowImpl::getName() const {
+const string& FlowBody::getName() const {
     return name;
 }
 
-void FlowImpl::setSource(System* source) {
+void FlowBody::setName(const string& name) {
+    this->name = name;
+}
+
+void FlowBody::setSource(System* source) {
     this->source = source;
 }
 
-void FlowImpl::setDestination(System* destination) {
+void FlowBody::setDestination(System* destination) {
     this->destination = destination;
 }
 
-System* FlowImpl::getSource() const {
+System* FlowBody::getSource() const {
     return source;
 }
 
-System* FlowImpl::getDestination() const {
+System* FlowBody::getDestination() const {
     return destination;
 }
